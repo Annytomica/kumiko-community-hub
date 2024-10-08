@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Article, ArticleComment
+from .models import Article, ArticleComment, ArticleLike
 
 @admin.register(Article)
 class ArticleAdmin(SummernoteModelAdmin):
@@ -14,3 +14,4 @@ class ArticleAdmin(SummernoteModelAdmin):
 
 # Register your models here.
 admin.site.register(ArticleComment)
+admin.site.register(ArticleLike)
