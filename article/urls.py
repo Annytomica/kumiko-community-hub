@@ -3,5 +3,6 @@ from django.urls import path
 
 
 urlpatterns = [
-    path('', views.ArticleList.as_view(), name='articles'),
+    # temporary name = 'home', change back to articles once real homepage created
+    path('articles/', views.ArticleList.as_view(), name='home'),
 ]
