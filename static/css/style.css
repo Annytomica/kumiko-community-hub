@@ -1730,7 +1730,6 @@
  blockquote {
      margin: 0 0 var(--vspace-1) 0;
      padding: var(--vspace-1) var(--vspace-1_5);
-     border-left: 4px solid black;
      position: relative;
  }
  

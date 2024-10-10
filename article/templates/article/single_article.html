@@ -2,34 +2,40 @@
 {% extends 'base.html' %} {% block content %}
 {% load static %}
 
-<div class="masthead">
-    <div class="container">
-        <div class="row g-0">
-            <div class="col-md-6 masthead-text">
-                <!-- Post title goes in these h1 tags -->
-                <h1 class="post-title">{{ article.title }}</h1>
-                <!-- Post author goes before the | the post's created date goes after -->
-                <p class="post-subtitle">{{ article.author }} | {{ article.created_on }}</p>
-            </div>
-            <div class="d-none d-md-block col-md-6 masthead-image">
-                <img src="{% static 'images/default.jpg' %}" class="scale" alt="placeholder">
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="container">
-    <div class="row">
-        <div class="col card mb-4  mt-3 left  top">
-            <div class="card-body">
-                <!-- The post content goes inside the card-text. -->
-                <!-- Use the | safe filter inside the template tags -->
-                <p class="card-text">
-                    {{ article.content | safe }}
-                </p>
+    <section class="s-content s-content--single">
+        <div class="row">
+            <div class="column large-12">
+                <article class="s-post entry format-standard">
+                    <div class="s-content__media">
+                        <div class="s-content__post-thumb">
+                            <img src="{% static 'images/kch-article-placeholder.webp' %}" class="scale" alt="placeholder">
+                        </div>
+                    </div>
+
+                    <div class="s-content__primary">
+                        <!-- Article title  -->
+                        <h2 class="s-content__title s-content__title--post">{{ article.title }}</h2>
+                        <!-- Article author | created date then Article Tag -->
+                        <ul class="s-content__post-meta"></ul>
+                            <li class="date">{{ article.author }} | {{ article.created_on }}</li>
+                            <li class="cat">{{ article.get_tags_display }}</li>
+                        </ul>
+                        <!-- Article content | use safe filter -->
+                        <p class="lead">
+                            {{ article.excerpt | safe }}
+                        </p>
+                        <blockquote>
+                            {{ article.pull_quote }}
+                        </blockquote>
+                        <p>
+                            {{ article.content | safe }}
+                        </p>
+                    </div>
+
+                </article>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 
 {% endblock content %}
