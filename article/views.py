@@ -30,5 +30,5 @@ def single_article(request, slug):
     return render(
         request,
         "article/single_article.html",
-        {"article": single_article},
+        {"article": post},
     )
