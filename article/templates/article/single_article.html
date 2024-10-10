@@ -25,9 +25,11 @@
                         <p class="lead">
                             {{ article.excerpt | safe }}
                         </p>
-                        <blockquote>
-                            {{ article.pull_quote }}
-                        </blockquote>
+                        <figure class="pull-quote">
+                            <blockquote>
+                               <p>{{ article.pull_quote }}</p> 
+                            </blockquote>
+                        </figure>
                         <p>
                             {{ article.content | safe }}
                         </p>
