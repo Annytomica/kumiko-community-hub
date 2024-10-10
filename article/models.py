@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-TAGS = ((0, "New"), (1, "Course"), (2, "Tools"), (3, "Project"), (4, "Wood"), (5, "How-to"))
+TAGS = ((0, "New"), (1, "Course"), (2, "Tools"), (3, "Project"), (4, "Wood"), (5, "How-to"), (6, "Book"))
 STATUS = ((0, "Draft"), (1, "Published"))
 
 
