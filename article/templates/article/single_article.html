@@ -69,12 +69,16 @@
                                 </div>
                             </div>
                             {% if not comment.approved and comment.author == user %}
-                            <div class="comment__text text-secondary">{{ comment.body | linebreaks }}</div>
+                            <div class="comment__text text-secondary" id="comment{{ comment.id }}">{{ comment.body | linebreaks }}</div>
                             <p>
                             This comment is awaiting approval
                             </p>
                             {% else %}
-                            <div class="comment__text">{{ comment.body | linebreaks }}</div>
+                            <div class="comment__text" id="comment{{ comment.id }}">{{ comment.body | linebreaks }}</div>
+                            {% endif %}
+                            {% if user.is_authenticated and comment.author == user %}
+                            <button class="btn btn-edit"
+                            comment_id="{{ comment.id }}">Edit</button>
                             {% endif %}
                         </li>
                         {% endfor %}
@@ -87,11 +91,11 @@
                     {% if user.is_authenticated %}
                     <h3>Leave a comment:</h3>
                     <p>Posting as: {{ user.username }}</p>
-                    <form id="contactForm" method="post"
+                    <form id="contactForm commentForm" method="post"
                             style="margin-top: 1.3em;">
                         {{ article_comment_form | crispy }}
                         {% csrf_token %}
-                        <button id="submit" class="btn btn--primary btn-wide btn--large h-full-width" 
+                        <button id="submit submitButton" class="btn btn--primary btn-wide btn--large h-full-width" 
                             type="submit">Add comment</button>
                     </form>
                     {% else %}
@@ -103,3 +107,7 @@
     </section>
 
 {% endblock content %}
+
+{% block extras %}
+<script src="{% static 'js/comments.js' %}"></script>
+{% endblock %}
