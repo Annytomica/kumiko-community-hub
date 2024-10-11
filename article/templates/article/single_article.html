@@ -17,9 +17,9 @@
                         <!-- Article title  -->
                         <h2 class="s-content__title s-content__title--post">{{ article.title }}</h2>
                         <!-- Article author | created date then Article Tag -->
-                        <ul class="nav s-content__post-meta"></ul>
-                            <li class="nav-item date">{{ article.author }} | {{ article.created_on }}</li>
-                            <li class="nav-item cat">{{ article.get_tags_display }}</li>
+                        <ul class="s-content__post-meta">
+                            <li class="date">{{ article.created_on }}</li>
+                            <li class="cat">{{ article.get_tags_display }}</li>
                         </ul>
                         <!-- Article content | use safe filter -->
                         <p class="lead">
