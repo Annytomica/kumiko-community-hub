@@ -9,7 +9,7 @@ class ArticleAdmin(SummernoteModelAdmin):
     search_fields = ['title', 'tags']
     list_filter = ('status','created_on', 'tags',)
     prepopulated_fields = {'slug': ('title',)}
-    summernote_fields = ('content',)
+    summernote_fields = ()
 
 
 # Register your models here.
