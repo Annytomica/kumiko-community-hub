@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
@@ -14,6 +15,13 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="image-container">
+                                {% if "placeholder" in article.primary_image.url %}
+                                <img class="card-img-top" src="{% static 'images/kch-article-placeholder.webp' %}"
+                                  alt="placeholder image">
+                                {% else %}
+                                <img class="card-img-top" src=" {{ article.primary_image.url }}"
+                                  alt="{{ article.title }}">
+                                {% endif %}
                                 <div class="image-flash">
                                     <p class="author">Author: {{ article.author }}</p>
                                 </div>

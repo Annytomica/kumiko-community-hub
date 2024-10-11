@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 
 TAGS = ((0, "New"), (1, "Course"), (2, "Tools"), (3, "Project"), (4, "Wood"), (5, "How-to"), (6, "Book"))
 STATUS = ((0, "Draft"), (1, "Published"))
@@ -17,9 +18,11 @@ class Article(models.Model):
     content = models.TextField()
     excerpt = models.TextField(blank=True)
     pull_quote = models.CharField(max_length=200, unique=True)
+    primary_image = CloudinaryField('image', default='placeholder')
     tags = models.IntegerField(choices=TAGS, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-created_on"]

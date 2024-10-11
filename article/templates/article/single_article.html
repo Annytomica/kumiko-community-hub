@@ -18,7 +18,11 @@
                 <article class="s-post entry format-standard">
                     <div class="s-content__media">
                         <div class="s-content__post-thumb">
+                            {% if "placeholder" in article.primary_image.url %}
                             <img src="{% static 'images/kch-article-placeholder.webp' %}" class="scale" alt="placeholder">
+                            {% else %}
+                            <img src=" {{ article.primary_image.url }}" class="scale" alt="{{ article.title }}">
+                            {% endif %}
                         </div>
                     </div>
 
