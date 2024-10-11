@@ -26,9 +26,14 @@ def single_article(request, slug):
 
     queryset = Article.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
+    article_comments = post.article_comments.all().order_by("-created_on")
+    article_comment_count = post.article_comments.filter(approved=True).count()
 
     return render(
         request,
         "article/single_article.html",
-        {"article": post},
+        {"article": post,
+        "article_comments": article_comments,
+        "article_comment_count": article_comment_count,
+        },
     )

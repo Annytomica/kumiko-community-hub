@@ -1,20 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Views Part 1</title>
-</head>
+{% block content %}
 
-<body>
-    <h1>Articles list</h1>
-    {% for article in object_list %}
-    <h2>{{article.title}}</h2>
-    <p>{{article.excerpt}}</p>
-    <p>Author: {{article.author}}</p>
-    {% endfor %}
-</body>
+<!-- article_list.html content starts here -->
+<div class="container-fluid">
+    <div class="row">
 
-</html>
+        <!-- Article Entries Column -->
+        <div class="col-12 mt-3 left">
+            <div class="row">
+                {% for article in article_list %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="image-container">
+                                <div class="image-flash">
+                                    <p class="author">Author: {{ article.author }}</p>
+                                </div>
+                            </div>
+                            <a href="{% url 'single_article' article.slug %}" class="post-link">
+                                <h2 class="card-title">{{ article.title }}</h2>
+                                <p class="card-text">{{ article.excerpt }}</p>
+                            </a>
+
+                            <hr />
+                            <p class="card-text text-muted h6">{{ article.created_on}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+            </div>
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    {% if is_paginated %}
+    <nav class="pgn" aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a class="pgn__prev" href="?page={{ page_obj.previous_page_number }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12.707 17.293L8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z"></path></svg>
+                </a>
+            </li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a class="pgn__next" href="?page={{ page_obj.next_page_number }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11.293 17.293l1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+<!-- article_list.html content ends here -->
+{% endblock content %}
