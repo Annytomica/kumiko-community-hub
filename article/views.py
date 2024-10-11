@@ -78,3 +78,20 @@ def article_comment_edit(request, slug, comment_id):
             messages.add_message(request, messages.ERROR, 'Error updating comment!')
 
     return HttpResponseRedirect(reverse('single_article', args=[slug]))
+
+
+def article_comment_delete(request, slug, comment_id):
+    """
+    view to delete article comments
+    """
+    queryset = Article.objects.filter(status=1)
+    post = get_object_or_404(queryset, slug=slug)
+    comment = get_object_or_404(ArticleComment, pk=comment_id)
+
+    if comment.author == request.user:
+        comment.delete()
+        messages.add_message(request, messages.SUCCESS, 'Comment Deleted!')
+    else:
+        messages.add_message(request, messages.ERROR, 'Nope, that was not your comment to delete!')
+
+    return HttpResponseRedirect(reverse('single_article', args=[slug]))
