@@ -79,7 +79,7 @@
                             {% if user.is_authenticated and comment.author == user %}
                             <button class="btn btn-edit"
                                 comment_id="{{ comment.id }}">Edit</button>
-                            <button class="btn btn-delete"
+                            <button class="btn btn-delete btn--primary"
                                 comment_id="{{ comment.id }}">Delete</button>
                             {% endif %}
                         </li>
@@ -93,10 +93,11 @@
                     {% if user.is_authenticated %}
                     <h3>Leave a comment:</h3>
                     <p>Posting as: {{ user.username }}</p>
-                    <form id="contactForm commentForm" method="post"
-                            style="margin-top: 1.3em;">
+                    <form id="contactForm commentForm" method="post">
+                        <div class="message form-field">
                         {{ article_comment_form | crispy }}
                         {% csrf_token %}
+                        </div>
                         <button id="submit submitButton" class="btn btn--primary btn-wide btn--large h-full-width" 
                             type="submit">Add comment</button>
                     </form>
@@ -113,9 +114,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title"
+                    <h5 class="modal-title"
                     id="deleteModalLabel">Delete comment?</h5>
-                <button type="button" class="btn-close"
+                    <button type="button" class="btn-close"
                     data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

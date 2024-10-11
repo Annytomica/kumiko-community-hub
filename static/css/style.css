@@ -1,3 +1,25 @@
 #a__content {
     font-family: "Raleway", Arial, Helvetica, sans-serif; 
 }
+
+/** CSS for overriding conflicting crispy form and Abstract form styles **/
+
+/** Overides small crispy-forms default textarea size **/
+textarea.form-control {
+    min-height: 20rem;
+}
+
+/** removes large padding-top **/
+.comment-respond form {
+    padding: 0;
+}
+
+/** removes asterisk from label of crispy form field **/
+.asteriskField {
+    display: none;
+}
+
+/** hides 'body' title of crispy form field **/
+.form-label {
+    display: none;
+}

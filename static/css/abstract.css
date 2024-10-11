@@ -2506,7 +2506,7 @@
      background-repeat: no-repeat;
      background: center center;
      background-size: contain;
-     background-image: url(../images/icons/icon-quote.svg);
+     background-image: url(/static/images/icon-quote.webp);
      -webkit-transform: translate3d(-50%, 0, 0);
      transform: translate3d(-50%, 0, 0);
      position: absolute;
