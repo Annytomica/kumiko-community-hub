@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from .models import Article
+from .forms import ArticleCommentForm
 
 
 # Create your views here.
@@ -28,6 +29,16 @@ def single_article(request, slug):
     post = get_object_or_404(queryset, slug=slug)
     article_comments = post.article_comments.all().order_by("-created_on")
     article_comment_count = post.article_comments.filter(approved=True).count()
+    
+    if request.method == "POST":
+        article_comment_form = ArticleCommentForm(data=request.POST)
+        if article_comment_form.is_valid():
+            comment = article_comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+    
+    article_comment_form = ArticleCommentForm()
 
     return render(
         request,
@@ -35,5 +46,6 @@ def single_article(request, slug):
         {"article": post,
         "article_comments": article_comments,
         "article_comment_count": article_comment_count,
+        "article_comment_form": article_comment_form,
         },
     )
