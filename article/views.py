@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.contrib import messages
 from .models import Article
 from .forms import ArticleCommentForm
 
@@ -37,6 +38,10 @@ def single_article(request, slug):
             comment.author = request.user
             comment.post = post
             comment.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Comment submitted and awaiting approval'
+            )
     
     article_comment_form = ArticleCommentForm()
 
