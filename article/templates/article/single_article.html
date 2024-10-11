@@ -5,17 +5,20 @@
 
 
     <section class="s-content s-content--single">
-        <!-- Displaying count of comments -->
+        <!-- Displaying count of likes and comments -->
         <div class="row">
             <div class="column large-12">
                 <p class="text-secondary text-end">
+                    <i class="far fa-comments"></i> {{ article_likes_count }}
                     <i class="far fa-comments"></i> {{ article_comment_count }}
                 </p>
             </div>
         </div>
+        <!-- main article content -->
         <div class="row">
             <div class="column large-12">
                 <article class="s-post entry format-standard">
+                    <!-- Primary image for Article -->
                     <div class="s-content__media">
                         <div class="s-content__post-thumb">
                             {% if "placeholder" in article.primary_image.url %}
@@ -25,11 +28,11 @@
                             {% endif %}
                         </div>
                     </div>
-
+                    <!-- Body of article -->
                     <div class="s-content__primary">
                         <!-- Article title  -->
                         <h2 class="s-content__title s-content__title--post">{{ article.title }}</h2>
-                        <!-- Article author | created date then Article Tag -->
+                        <!-- Article created date then Article Tag -->
                         <ul class="s-content__post-meta">
                             <li class="date">{{ article.created_on }}</li>
                             <li class="cat display-6">{{ article.get_tags_display }}</li>
@@ -48,6 +51,18 @@
                         </p>
                     </div>
                 </article>
+            </div>
+        </div>
+        <!-- Like button -->
+        <div class="row">
+            <div class="column large-12">
+                <div class="s-content__primary">
+                    <form method="post">
+                        {% csrf_token %}
+                        <button class="btn btn--like" type="submit"></button>
+                        <p class="text-secondary"> Like this article?</p>
+                    </form>
+                </div>
             </div>
         </div>
         <!-- Comments Section -->

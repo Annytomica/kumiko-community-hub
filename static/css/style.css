@@ -2,6 +2,12 @@
     font-family: "Raleway", Arial, Helvetica, sans-serif; 
 }
 
+.btn--like {
+    background: transparent !important;
+    border: none;
+}
+
+
 /** CSS for overriding conflicting crispy form and Abstract form styles **/
 
 /** Overides small crispy-forms default textarea size **/

@@ -2,8 +2,8 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.views import generic
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from .models import Article, ArticleComment
-from .forms import ArticleCommentForm
+from .models import Article, ArticleComment, ArticleLike
+from .forms import ArticleCommentForm, ArticleLikeForm
 
 
 # Create your views here.
@@ -21,6 +21,18 @@ def single_article(request, slug):
 
     ``post``
         An instance of :model:`article.Article`.
+    
+    ``article_comment``
+        All comments related to the article
+    
+    `` article_comment_count``
+        A count of all approved comments to the article
+    
+    ``article_likes``
+        All likes related to the article
+    
+    ``article_like_count``
+        A count of all likes of the article
 
     **Template:**
 
@@ -31,6 +43,8 @@ def single_article(request, slug):
     post = get_object_or_404(queryset, slug=slug)
     article_comments = post.article_comments.all().order_by("-created_on")
     article_comment_count = post.article_comments.filter(approved=True).count()
+    article_likes = post.article_like.all().order_by("-created_on")
+    article_likes_count = post.article_like.all().count()
     
     if request.method == "POST":
         article_comment_form = ArticleCommentForm(data=request.POST)
@@ -43,8 +57,20 @@ def single_article(request, slug):
                 request, messages.SUCCESS,
                 'Comment submitted and awaiting approval'
             )
+        
+        article_like_form = ArticleLikeForm(data=request.POST)
+        if article_like_form.is_valid():
+            like = article_like_form.save(commit=False)
+            like.author = request.user
+            like.post = post
+            like.save()
+            messages.add_message(
+                request, messages.SUCCESS,
+                'Comment submitted and awaiting approval'
+            )
     
     article_comment_form = ArticleCommentForm()
+    article_like_form = ArticleLikeForm()
 
     return render(
         request,
@@ -53,6 +79,9 @@ def single_article(request, slug):
         "article_comments": article_comments,
         "article_comment_count": article_comment_count,
         "article_comment_form": article_comment_form,
+        "article_likes": article_likes,
+        "article_likes_count": article_likes_count,
+        "article_like_form": article_like_form,
         },
     )
 
