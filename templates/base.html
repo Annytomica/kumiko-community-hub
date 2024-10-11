@@ -29,7 +29,8 @@
     <link rel="stylesheet" href="{% static 'css/abstract.css' %}">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
 
 </head>
 
@@ -50,6 +51,16 @@
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
                             href="{% url 'home' %}">Home</a>
                     </li>
+                    
+                </ul>
+                <span class="navbar-text text-muted">
+                    {% if user.is_authenticated %}
+                    <p class="text-end m-3">You are logged in as {{ user }}</p>
+                    {% else %}
+                    <p class="text-end m-3">You are not logged in</p>
+                    {% endif %}
+                </span>
+                <ul class="nav justify-content-end">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
@@ -64,13 +75,6 @@
                     </li>
                     {% endif %}
                 </ul>
-                <span class="navbar-text text-muted">
-                    {% if user.is_authenticated %}
-                    <p class="text-end m-3">You are logged in as {{ user }}</p>
-                    {% else %}
-                    <p class="text-end m-3">You are not logged in</p>
-                    {% endif %}
-                </span>
             </div>
         </div>
     </nav>
