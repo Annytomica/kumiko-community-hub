@@ -7,21 +7,21 @@
         {% if "placeholder" in article.primary_image.url %}
         <img src="{% static 'images/kch-article-placeholder.webp' %}" class="scale" alt="placeholder">
         {% else %}
-        <img src=" {{ contact.contact_image.url }}" class="scale" alt="{{ about.opening }}">
+        <img src=" {{ contact.contact_image.url }}" class="scale" alt="{{ contact.opening }}">
         {% endif %}
     </div>
     <div class="col-8">
       <!-- Title goes between these h2 tags -->
-      <h2>{{ about.title }}</h2>
+      <h2>{{ contact.opening }}</h2>
       <!-- Content goes directly underneath this -->
-      {{ about.content | safe }}
+      {{ contact.body | safe }}
     </div>
   </div>
   <div class="row">
     <div class="col text-right">
       <!-- Updated on field goes in here -->
 
-      <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
+      <p class="text-end"><em>Updated on: {{ contact.updated_on }}</em></p>
     </div>
   </div>
 </div>

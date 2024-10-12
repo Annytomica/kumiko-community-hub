@@ -7,7 +7,7 @@ from .models import Contact
 @admin.register(Contact)
 class ContactAdmin(SummernoteModelAdmin):
     list_display = ('opening', )
-    summernote_fields = ('body',)
+    summernote_fields = ()
 
 
 # Register your models here.
