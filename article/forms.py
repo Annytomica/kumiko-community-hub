@@ -6,6 +6,9 @@ class ArticleCommentForm(forms.ModelForm):
     class Meta:
         model = ArticleComment
         fields = ('body',)
+        widgets = {
+            'body': forms.Textarea(attrs={'placeholder': 'Leave your comment here',})
+        }
 
 class ArticleLikeForm(forms.ModelForm):
     class Meta:

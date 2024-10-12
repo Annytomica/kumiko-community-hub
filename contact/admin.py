@@ -13,4 +13,4 @@ class ContactAdmin(SummernoteModelAdmin):
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ('message', 'read',)
+    list_display = ('name', 'created_on', 'read',)
