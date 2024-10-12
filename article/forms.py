@@ -11,3 +11,6 @@ class ArticleLikeForm(forms.ModelForm):
     class Meta:
         model = ArticleLike
         fields = ('like',)
+        widgets = {
+            'like': forms.HiddenInput()  # This makes the 'like' field hidden
+        }

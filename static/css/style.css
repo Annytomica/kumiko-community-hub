@@ -1,5 +1,7 @@
-#a__content {
-    font-family: "Raleway", Arial, Helvetica, sans-serif; 
+/** General Custom Styles **/
+
+.fa, .fas, .far {
+    font-size: x-large;
 }
 
 .btn--like {

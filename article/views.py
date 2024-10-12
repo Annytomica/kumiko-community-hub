@@ -39,14 +39,22 @@ def single_article(request, slug):
     :template:`article/single_article.html`
     """
 
+    # get the article
     queryset = Article.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
+
+    # get the comments and likes
     article_comments = post.article_comments.all().order_by("-created_on")
     article_comment_count = post.article_comments.filter(approved=True).count()
-    article_likes = post.article_like.all().order_by("-created_on")
-    article_likes_count = post.article_like.all().count()
+    article_likes_count = post.article_like.filter(like=True).count()
+
+    # Check if user already liked post
+    user_like = None
+    if request.user.is_authenticated:
+        user_like = ArticleLike.objects.filter(author=request.user, post=post).first()
     
     if request.method == "POST":
+        # comment form
         article_comment_form = ArticleCommentForm(data=request.POST)
         if article_comment_form.is_valid():
             comment = article_comment_form.save(commit=False)
@@ -58,16 +66,26 @@ def single_article(request, slug):
                 'Comment submitted and awaiting approval'
             )
         
+        # like/unlike
         article_like_form = ArticleLikeForm(data=request.POST)
         if article_like_form.is_valid():
-            like = article_like_form.save(commit=False)
-            like.author = request.user
-            like.post = post
-            like.save()
-            messages.add_message(
-                request, messages.SUCCESS,
-                'Comment submitted and awaiting approval'
-            )
+            if user_like:
+                user_like.like = not user_like.like
+                user_like.save()
+                if user_like.like:
+                    messages.add_message(request, messages.SUCCESS, 'You liked this article.')
+                else:
+                    messages.add_message(request, messages.SUCCESS, 'You unliked this article.')
+
+            else:
+                like = article_like_form.save(commit=False)
+                like.author = request.user
+                like.post = post
+                like.save()
+                messages.add_message(request, messages.SUCCESS, 'You liked this article.')
+
+        # Recalculate like count after changes
+        article_likes_count = post.article_like.filter(like=True).count()
     
     article_comment_form = ArticleCommentForm()
     article_like_form = ArticleLikeForm()
@@ -79,9 +97,9 @@ def single_article(request, slug):
         "article_comments": article_comments,
         "article_comment_count": article_comment_count,
         "article_comment_form": article_comment_form,
-        "article_likes": article_likes,
         "article_likes_count": article_likes_count,
         "article_like_form": article_like_form,
+        "user_like": user_like,
         },
     )
 
