@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
-{% block content %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
 <div class="container mt-5">
   <div class="row">
     <div class="col-4 text-center">
@@ -20,8 +23,17 @@
   <div class="row">
     <div class="col text-right">
       <!-- Updated on field goes in here -->
-
       <p class="text-end"><em>Updated on: {{ contact.updated_on }}</em></p>
+    </div>
+  </div>
+  <div class="row justify-content-center"></div>
+    <div class="col-12 col-md-6 my-5">
+        <h2>Let's collaborate!</h2>
+        <form method="post">
+          {{ contact_message | crispy }}
+          {% csrf_token %}
+          <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
     </div>
   </div>
 </div>
