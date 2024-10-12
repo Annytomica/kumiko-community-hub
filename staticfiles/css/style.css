@@ -9,6 +9,15 @@
     border: none;
 }
 
+.opening {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .opening {
+        margin-top: 2rem;
+    }
+}
 
 /** CSS for overriding conflicting crispy form and Abstract form styles **/
 

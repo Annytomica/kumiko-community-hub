@@ -4,37 +4,35 @@
 
 {% block content %}
 
-<div class="container mt-5">
+<section class="s-content site-page">
   <div class="row">
-    <div class="col-4 text-center">
-        {% if "placeholder" in article.primary_image.url %}
-        <img src="{% static 'images/kch-article-placeholder.webp' %}" class="scale" alt="placeholder">
-        {% else %}
-        <img src=" {{ contact.contact_image.url }}" class="scale" alt="{{ contact.opening }}">
-        {% endif %}
-    </div>
-    <div class="col-8">
-      <!-- Title goes between these h2 tags -->
-      <h2>{{ contact.opening }}</h2>
-      <!-- Content goes directly underneath this -->
-      {{ contact.body | safe }}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col text-right">
-      <!-- Updated on field goes in here -->
-      <p class="text-end"><em>Updated on: {{ contact.updated_on }}</em></p>
-    </div>
-  </div>
-  <div class="row justify-content-center"></div>
-    <div class="col-12 col-md-6 my-5">
-        <h2>Let's collaborate!</h2>
-        <form method="post">
-          {{ contact_message | crispy }}
-          {% csrf_token %}
-          <button class="btn btn-secondary" type="submit">Submit</button>
-        </form>
+    <div class="column large-12">
+      <section>
+        <div class="s-content__media">
+          <div class="row block-large-1-2 block-tab-full s-content__blocks">
+            <div class="column">
+              {% if "placeholder" in article.primary_image.url %}
+              <img src="{% static 'images/kch-article-placeholder.webp' %}" class="scale" alt="placeholder">
+              {% else %}
+              <img src=" {{ contact.contact_image.url }}" class="scale" alt="{{ contact.opening }}">
+              {% endif %}
+            </div>
+            <div class="column">
+              <h2 class="opening">{{ contact.opening }}</h2>
+              <p>{{ contact.body | safe }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="s-content__primary">
+          <form class="s-content__form" method="post">
+            {{ contact_message | crispy }}
+            {% csrf_token %}
+            <button class="submit btn btn--primary btn--medium h-full-width" type="submit">Submit</button>
+          </form>
+        </div>
+      </section>
     </div>
   </div>
-</div>
+</section>
+
 {% endblock content %}
