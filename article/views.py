@@ -10,7 +10,7 @@ from .forms import ArticleCommentForm, ArticleLikeForm
 class ArticleList(generic.ListView):
     queryset = Article.objects.filter(status=1).order_by("-created_on")
     template_name = "article/index.html"
-    paginate_by = 3
+    paginate_by = 1
 
 
 def single_article(request, slug):
