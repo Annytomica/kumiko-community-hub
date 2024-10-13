@@ -5,6 +5,13 @@
 
 <!-- index.html content starts here -->
 <div class="container-fluid hero">
+    <picture>
+        <source srcset="{% static 'images/kch-hero_image-1924px.webp' %}" media="(min-width:1200px)" sizes="100vw">
+        <source srcset="{% static 'images/kch-hero_image-1200px.webp' %}" media="(min-width: 992px)" sizes="100vw">
+        <source srcset="{% static 'images/kch-hero_image-992px.webp' %}" media="(min-width: 768px)" sizes="100vw">
+        <source srcset="{% static 'images/kch-hero_image-768px.webp' %}" media="(min-width: 576px)" sizes="100vw">
+        <img src="{% static 'images/kch-hero_image-576px.webp' %}" alt="Kumiko Community Hub" sizes="100vw" loading="lazy" decoding="async">
+    </picture>
     <div class="row align-items-center">
       <div class="col-md-9 text-center gy-4">
         <p class="p__banner">The world's largest Kumiko sharing community, inspiring people the learn and thrive together</p>

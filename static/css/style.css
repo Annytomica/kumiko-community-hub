@@ -9,6 +9,10 @@
     border: none;
 }
 
+.container-fluid.hero {
+    padding: 0;
+}
+
 .opening {
     margin-top: 0;
 }
@@ -23,6 +27,8 @@
     font-weight: 500;
 }
 
+
+/**  Media queries for General Custom Styles  **/
 @media screen and (max-width: 800px) {
     .opening {
         margin-top: 2rem;
