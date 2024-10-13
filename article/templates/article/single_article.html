@@ -104,6 +104,7 @@
                             </div>
                             {% if not comment.approved and comment.author == user %}
                             <div class="comment__text text-secondary" id="comment{{ comment.id }}">{{ comment.body | linebreaks }}</div>
+                            
                             <p>
                             This comment is awaiting approval
                             </p>
@@ -112,9 +113,9 @@
                             {% endif %}
                             {% if user.is_authenticated and comment.author == user %}
                             <button class="btn btn-edit"
-                                comment_id="{{ comment.id }}">Edit</button>
+                                data-comment_id="{{ comment.id }}">Edit</button>
                             <button class="btn btn-delete btn--primary"
-                                comment_id="{{ comment.id }}">Delete</button>
+                                data-comment_id="{{ comment.id }}">Delete</button>
                             {% endif %}
                         </li>
                         {% endfor %}
@@ -127,12 +128,12 @@
                     {% if user.is_authenticated %}
                     <h3>Leave a comment:</h3>
                     <p>Posting as: {{ user.username }}</p>
-                    <form id="contactForm commentForm" method="post">
+                    <form id="commentForm" method="post">
                         <div class="message form-field">
                         {{ article_comment_form | crispy }}
                         {% csrf_token %}
                         </div>
-                        <button id="submit submitButton" class="btn btn--primary btn-wide btn--large h-full-width" 
+                        <button id="submitButton" class="btn btn--primary btn-wide btn--large h-full-width" 
                             type="submit">Add comment</button>
                     </form>
                     {% else %}
