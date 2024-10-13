@@ -132,17 +132,86 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-3 dark-bg">
-        <p class="m-0 text-center">
-            {% block copyright %}
-            Copyright 2024 Annytomica
-            {% endblock copyright %}
-        </p>
-        <p class="m-0 text-center">Follow us:            
-            <i class="fab fa-instagram-square ms-3"></i>
-            <i class="fab fa-youtube-square ms-3"></i>
-        </p>
-    </footer>
+     <!-- footer
+    ================================================== -->
+    <footer class="s-footer">
+
+        <div class="s-footer__main">
+
+            <div class="row">
+
+                <div class="column large-4 medium-6 tab-12 s-footer__info">
+
+                    <h5>About Our Site</h5>
+
+                    <p>
+                        KCH is a vibrant community hub for individuals who are passionate about kumiko, providing a welcoming space for people to learn, share, and grow their skills in this intricate art form.
+                    </p>
+
+                </div> <!-- end s-footer__info -->
+
+                <div class="column large-2 medium-3 tab-6 s-footer__site-links">
+
+                    <h5>Site Links</h5>
+
+                    <ul>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'home' %}">Articles</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__site-links -->  
+
+                <div class="column large-2 medium-3 tab-6 s-footer__social-links">
+
+                    <h5>Social</h5>
+
+                    <ul>
+                        <li><a href="https://dribbble.com/" target="_blank" rel="noopener"
+                            aria-label="Dribbble homepage (opens in a new tab)">Dribbble</a></li>
+                        <li><a href="https://uk.pinterest.com/" target="_blank" rel="noopener"
+                            aria-label="Pinterest homepage (opens in a new tab)">Pinterest</a></li>
+                        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"
+                            aria-label="Instagram homepage (opens in a new tab)">Instagram</a></li>
+                    </ul>
+
+                </div> <!-- end s-footer__social links --> 
+
+                <div class="column large-4 medium-12 s-footer__subscribe">
+
+                    <h5>Got a question? </h5>
+
+                    <p>Send us a message. All feedback is welcome.</p>
+
+                    <div class="subscribe-form">
+                        <a href="{% url 'contact' %}" class="btn h-full-width">Let us know whats up</a>
+                    </div>
+
+                </div> <!-- end s-footer__subscribe -->
+
+            </div> <!-- end row -->
+
+        </div> <!-- end s-footer__main -->
+
+        <div class="s-footer__bottom">
+            <div class="row">
+                <div class="column">
+                    <div class="ss-copyright">
+                        <span>© Copyright Annytomica 2024</span> 
+                        <span>Template Design by <a href="https://www.styleshout.com/" target="_blank" rel="noopener"
+                            aria-label="StyleShout homepage (opens in a new tab)">StyleShout</a></span>		         	
+                    </div> <!-- end ss-copyright -->
+                </div>
+            </div> 
+
+            <div class="ss-go-top">
+                <a class="smoothscroll" title="Back to Top" href="#top">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6 4h12v2H6zm5 10v6h2v-6h5l-6-6-6 6z"/></svg>
+                </a>
+            </div> <!-- end ss-go-top -->
+        </div> <!-- end s-footer__bottom -->
+
+    </footer> <!-- end s-footer -->
 
     <!-- Bootstrap JavaScript --> 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
