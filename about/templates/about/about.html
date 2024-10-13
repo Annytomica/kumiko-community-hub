@@ -1,28 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-4 text-center">
-        {% if "placeholder" in article.primary_image.url %}
-        <img src="{% static 'images/kch-article-placeholder.webp' %}" class="scale" alt="placeholder">
-        {% else %}
-        <img src=" {{ about.profile_image.url }}" class="scale" alt="{{ about.opening }}">
-        {% endif %}
-    </div>
-    <div class="col-8">
-      <!-- Title goes between these h2 tags -->
-      <h2>{{ about.opening }}</h2>
-      <!-- Content goes directly underneath this -->
-      {{ about.body | safe }}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col text-right">
-      <!-- Updated on field goes in here -->
 
-      <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
+<section class="s-content site-page">
+  <div class="row">
+    <div class="column large-12">
+      <section>
+        <div class="s-content__media">
+          <div class="row block-large-1-2 block-tab-full s-content__blocks">
+            <div class="column">
+              <h2 class="opening">{{ about.opening }}</h2>
+              <p>{{ about.body | safe }}</p>
+              <p class="text-end"><em>Updated on: {{ about.updated_on }}</em></p>
+            </div>
+            <div class="column">
+              {% if "placeholder" in article.primary_image.url %}
+              <img src="{% static 'images/kch-article-placeholder.webp' %}" class="scale" alt="placeholder">
+              {% else %}
+              <img src="{{ about.profile_image.url }}" class="scale" alt="{{ about.opening }}">
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
-</div>
+  <div class="container-fluid banner">
+    <div class="row align-items-center">
+      <div class="col-md-9 text-center gy-4">
+        <p class="p__banner">The world's largest Kumiko sharing community, inspiring people the learn and thrive together</p>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href="{{ signup_url }}" class="link btn">Join Now!</a>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
 {% endblock content %}

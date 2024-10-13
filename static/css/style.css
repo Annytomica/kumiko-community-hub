@@ -13,6 +13,16 @@
     margin-top: 0;
 }
 
+.banner {
+    background-color: black;
+    padding-top: 1.5rem;
+}
+
+.p__banner {
+    color: #fff;
+    font-weight: 500;
+}
+
 @media screen and (max-width: 800px) {
     .opening {
         margin-top: 2rem;
