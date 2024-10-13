@@ -37,6 +37,12 @@
 
 /** CSS for overriding conflicting crispy form and Abstract form styles **/
 
+/** Overides Abstract auto margin-bottom on img **/
+.navbar-brand img {
+    margin-bottom: 0;
+    margin-left: 1.5rem;
+}
+
 /** Overides really small font size in text-area and area styling inherited from crispy forms **/
 .form-control {
     padding: 1.6rem;
