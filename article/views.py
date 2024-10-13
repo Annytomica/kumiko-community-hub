@@ -7,12 +7,15 @@ from .forms import ArticleCommentForm, ArticleLikeForm
 
 
 # Create your views here.
+
+# Class-based view for article list
 class ArticleList(generic.ListView):
     queryset = Article.objects.filter(status=1).order_by("-created_on")
     template_name = "article/index.html"
-    paginate_by = 1
+    paginate_by = 3
 
 
+# Function-based view for a single article
 def single_article(request, slug):
     """
     Display an individual :model:`article.Article`.
@@ -102,6 +105,7 @@ def single_article(request, slug):
         "user_like": user_like,
         },
     )
+
 
 
 def article_comment_edit(request, slug, comment_id):
