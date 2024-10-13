@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const likeForm = document.getElementById("likeForm");
 
     likeButton.addEventListener("click", function() {
+
         // Toggle the like state
         likeCheckbox.checked = !likeCheckbox.checked;
 
