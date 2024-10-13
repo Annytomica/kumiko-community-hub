@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-
 <!-- index.html content starts here -->
 <div class="container-fluid hero">
     <picture>
@@ -30,7 +29,7 @@
             {% for article in article_list %}
             <article class="brick entry format-standard">
                 <div class="entry__thumb">
-                    <a href="" class="thumb-link">
+                    <a href="{% url 'single_article' article.slug %}" class="thumb-link">
                         {% if "placeholder" in article.primary_image.url %}
                         <img class="card-img-top" src="{% static 'images/kch-article-placeholder.webp' %}"
                             alt="placeholder image">
