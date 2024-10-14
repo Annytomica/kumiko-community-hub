@@ -7,6 +7,8 @@ KCH is a vibrant community hub for individuals who are passionate about kumiko, 
 
 The live website can be accessed [here](https://kumiko-b16d8bc28246.herokuapp.com/) 
 
+![home](static/images/home.png)
+
 # Features
 
 ## Existing features
@@ -62,6 +64,9 @@ Approved comments are displayed below the article. If the user is logged in and 
 
 #### Like button
 When logged in the like/unlike toggle button becomes visible. It toggles between outline (user has not liked article) and solid (user likes article). When solid it also add an increment of 1 to the likes counter.
+
+![likes](static/images/likes.png)
+
 #### Comment form
 When logged in the comment form is displayed and the user can submit a comment. If the user wants to edit a comment the comment is displayed in the form to change and resubmit.
 
@@ -85,9 +90,7 @@ The page provides a stylised visual presentation of all contact model field entr
 ![contact](static/images/contact.png)
 
 #### Contact form
-The contact form allows a site visitor to send a message to teh site admin. There is no requirement for the user to be logged in for this action.
-
-![contact_form](static/images/contact_form.png)
+The contact form allows a site visitor to send a message to the site admin. There is no requirement for the user to be logged in for this action.
 
 ## Future features
 ### User submitted projects gallery
