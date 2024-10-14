@@ -12,7 +12,7 @@
         <div class="s-content__primary">
           <h3>{% trans "Sign Up" %}</h3>
       
-          <p class="lead">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+          <p class="lead">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}"><b>sign in</b></a>.{% endblocktrans %}</p>
       
           <form class="s-content__form" id="cForm" method="post" action="{% url 'account_signup' %}">
             {% csrf_token %}

@@ -27,7 +27,7 @@ def contact_me(request):
             contact_message.save()
             messages.add_message(
                 request, messages.SUCCESS,
-                "Feedback received! Thank You!")
+                "Message sent! Thank You!")
 
     """
     Renders the About page
