@@ -13,135 +13,109 @@ The live website can be accessed [here](https://kumiko-b16d8bc28246.herokuapp.co
 # Features
 
 ## Existing features
+### Hero banner
+The hero photography is if Kumiko projects carried out by Anny Devoy, with the photograpgy by Megan Abel. It has a very simple message about the core principles of the community and invites people to join. The hero is a picture element, with differnt images to make efficiently responsive to screen size.
+![large hero image](static/images/kch-hero_image-1200px-2.webp)
 
-### Introduction and search options
-The app loads and presents the user with a brief introduction to the app and explanation of its purpose. 
+### Logo
 
-It then introduces the choices of method to search the database, using either gene name or Ensembl ID. This is followed by the prompt for the user to chose which search method they would like to use.
+### Article Gallery
+#### Masonry brick animated cards
+#### Pagination
 
-![intro](assets/static/intro.png)
+### base.html
+#### Navbar
+#### Footer
 
-### Gene search request
-The two search methods have different validation steps for user input, before providing the same output if the search is successful.
+### Single Article
+#### Display of single article
+#### Likes
+#### Comments
 
-#### Validation
-If the user does not input an appropriate value, input validation will provide an error message and request the user try again.
+### About Us
+#### Display of about
+#### Register Banner
 
-![choice-error](assets/static/incorrect_search_choice.png)
-
-#### Gene Name
-After intial selection, if valid, the user recieves a confirmation of their choice and a prompt to enter the gene name.
-
-![enter-gene](assets/static/gene-name_initial-choice.png)
-
-Validation of gene name:
-The only validation was checking is user had not hit enter without entering a gene name, which produces the following error message.
-
-![empty-field](assets/static/empty-field.png)
-
-This is because gene names can be a mix of letters and numbers and of variable character length. An improvement of this validation is discussed in future features.
-
-If the name is not found in the database the following message is displayed - explaining why it may not have been be found - along with provision to search again or exit.
-
-![not-in-dataset](assets/static/not-in-dataset-message.png)
-
-#### Ensembl ID
-After intial selection, if valid, the user recieves a confirmation of their choice and a prompt to enter the ensembl ID. This ID has a very specific format and so the criteria for the ID are set out for the user to minimise input error.
-
-![enter-ensembl](assets/static/ensembl_initial-choice.png)
-
-Validation of ensembl ID: As the ID has a very specific format, the validation confirms that the user input:
-1. That is starts with the correct ensembl mouse gene
-nomenclature of ENSMUSG
-2. That it is 18 characters long
-3. That the last 11 characters are numbers
-
-If the user input is not validated the following error message is displayed and the user is prompted to input the ID again.
-
-![wrong-ensembl](assets/static/incorrect-ensembl.png)
-
-### Output
-If the gene, searched via name or ID, is found in the database the user recieves a tabulated result and summary statement of the result.
-
-![result](assets/static/output-result.png)
-
-Below this, the user is also presented with an explainer, providing information on how to interpret result.
-
-![explainer](assets/static/output-explanation.png)
-
-### Search another gene or exit
-After a successful or unsuccessful (but valid) gene search, the user is provided with the opportunity to search for another gene or exit the app. 
-If they choose to search again they receive the same menu choice at start of app:
-![search-again](assets/static/search-again.png)
-
-If they choose to exit, they recieve a short thank you message
-
-![exit-message](assets/static/exit-message.png)
+### Contact
+#### Display of contact
+#### Contact form
 
 ## Future features
-### Multiple gene search
-Allow a user to input several gene names/IDs into a single search to save time. This feature requires each entry to be seperated, validated and processed individually before all output brought togther at the end. This also allows the user to make easy comparisons between genes.
+### User submitted projects gallery
 
-### Validation of gene name/ID against all known genes
-To extend the accuracy of validating a correct gene name or ensembl ID a worksheet that contains all known mouse genes and associated ID's will be generated and included. This would allow the statement that the gene exists but is not dysregulated in this model to be made which is very useful.
+### Homepage that displays selction of articles and user submitted projects
 
-### Expand number of databases to search
-Include other motor neuron disease gene expression databases. This allows user to compare genes between databases and allows user to see if expression changes are consistent across all databases (reliable result) or present in some or one database (less reliable result).
+### Display of like and comment counts on gallery cards
 
-### Enable copy and paste to mock terminal
-Presently the terminal does not accept a copy and pasted entry. This is problematic for the ensembl ID in particular as manual entry of this 18 character ID significantly increases the chance of user error with input. It would also be essential to have once multiple gene search is available.
+### Update Django-cloudinary to newer version 
+To allow presentation of images via HTTPS, not HTTP. Use of HTTP gives a warning in the console and significantly reduces the Lighthouse score for best practises for all pages displaying a Cloudinary-stored image.
 
-### Redesign mock terminal for use on mobiles
-Testing identified that the mock terminal was not suitable for running the app on small or touchscreens. To make the app more accessible to all devices adaptive sizing for mock terminal will be added.
-
+### Increase user navigation ability
+Present navigation back and forth on pages is limited. An ability to paginate through articles from the single article page would make a nice improvement to UX.
 
 # App design process
 
 ## Rationale
-Searching for expression changes in genes of interest is difficult for interested readers of the original publication. The original gene expression data is only accessible from a secondary pdf document provided as supplimentary data from the publishing house website OR by downloading the raw expression data from a data repository and carrying out your own analysis. 
+A full site project outline can be viewed [here]()
 
-To resolve this issue, and make the information more accessible, a console-based app has been developed using python. This app allows the user to simply input a gene name and they will be provided with the relevant gene expression for thier query.
+In summary, is a social initiative to support a community space for people interested in the Japanese woodcraft of Kumiko - detailed geometric wood panels for interior decoration applications. It is for those who have a background in woodcraft including Japanese joinery and Kumiko or who want to learn. The site allows users to access and share information about Kumiko and related resources.
 
 ## Goal
- A console based app that:
+ A website that:
  - is user friendly and intuitive
- - provides requested data quickly
- - provides the expression data in a format that is easy to understand and interpret
- - provides appropriate error feedback and explanation if users input is not matched in dataset
+ - provides useful information to the community
+ - encourages sharing of information through comments and messages to site admin
+ - encourages engagement and support through ability to 'like' content
+ - Has easy interface for site adim to upload new articles with auto-formatting of content
 
-## Data Model
-The data model used is the Genes class. 
+## Data Models
+### Project structure
+![structure](assets/static/app_flowchart.png)
 
-The Genes class holds all the relevant information for each gene in the Googlesheets database : Gene name, Ensembl ID, Gene expression, Siginficance value (p-value).
+### Data models ERD
+![erd](assets/static/app_flowchart.png)
 
-The class also has method, gene_expression(), to produce a result output for a valid gene query, either via gene name or ensembl ID, to the app user.
+The data models used are summarised as follows:
+Article:
+- article: stores all information for presenting a single article
+- article like: stores like status for single article 
+- article comment: stores comments for single article
 
-Choosing this data model enables easy expansion of app to include new datasets in the future.
+About:
+- about: stores all information for presenting a single about us page
 
-## Design of information processing flow
-A flowchart of the steps in information processing that the app needed to follow was mapped out in Figma.
-![flowchart](assets/static/app_flowchart.png)
-This flowchart was used to guide the development of functions and processes within the app. As the app was built and changes were made to the flow of the app, the flow chart was adjusted accordingly.
+Contact:
+- contact: stores all information for presenting a single contact page
+- contact form: stores message from user for admin to view
+
 
 ## Development process
-The app development followed the logical flow outlined in the flowchart, with steps outlined below:
-1. linked googlesheet database and created constants from data
-2. intro and search type selection
-3. search type validation
-4. gene name search
-5. gene expression output
-6. new search or exit
-7. ensembl ID search and validation
-8. introduction of Gene class and function refactoring
-
-The Gene class was added at a late stage in development as inclusion of a data model was intially missed from the app design. As all functions were already working, this refactoring required minimal change to app structure and functions.
+The app development, for each app included in the project, followed the steps outlined below:
+1. create app in kumiko Django project
+2. Do mminimum wireup of settings.py, views.py and urls.py and creating html template as defined in SI coursework
+3. Set up models and link to views and urls
+4. test model in admin panel
+5. Create appropriate views in views.py to display information stored in database model. One view taken through dev steps 5-9 at one time and then process repeated for next.
+6. create appropriate form method in forms.py if required for view
+7. add view specific html to template to display the view on the website
+8. deploy changes (with collect static) to test views on deployed site
+9. Final testing of fully completed app
 
 # Technologies
-- Python - all app functions
+- Django - all app functions
+- Bootstrap
+- HTML/CSS/JS
+- Cloudinary
+- Django-crispy-forms
+- gunicorn - for Heroku deployment of Django project
+- Django-allauth - for user validation
+- Django-summernote - for auto text area formatting assistance
+- whitenoise
 - Figma – flowchart development
-- Photoshop - Readme image processing
+- Photoshop - image processing
 - ChatGPT - troubleshooting, typo finding and logic problems
 - Heroku - app deployment and hosting
+- google docs, sheets and slides
 - UI.dev – amiresponsive was used to create site mockup images.
 
 # Testing
@@ -176,47 +150,45 @@ All functions, including validation steps were tested after each deployment. Tes
 ## Devices and Browsers
 
 ### Web browsers
-Chrome (primary), Firefox , Edge and Brave
+Chrome (primary), Firefox , Edge 
 
 ### Devices
-- Phones: Pixel4a
-- Laptops: Dell Inspirion 13”, MacBook Air 13”
+- Phones: Pixel4a, iPhoneXR, GalaxyS10
+- Laptops: Dell Inspirion 13”, MacBookPro 13”, MacBook Air 13”, MacBook Pro 16" (new model), Microsoft Surface (v.old model)
 - Desktop screens: BenQ PD series 27”
 
 ## Testing Summary
-The app worked on all devices and browsers tested, with no issues with loading or novel error messages found.
+The site worked on all devices and browsers tested, but issues were found on older devices. 
+The biggest issue identified was the Django authorisation forms (register in particlular) which did not always perform as intended and submit details correctly. Secondary, the interaction of classes from the Abstract template did cause fucntinal bugs at times and required significant troubleshooting to identify.
 
 ![testing-table](assets/static/testing-table.png)
 
-#### Not suitable for mobile phones
-While the app is functional on mobiles the following issues were apparent:
-- The mock terminal did not resize for smaller mobile screens and so:
-    - required sideways scrolling to read. 
-    - The terminal was partially covered by qwerty keyboard whenever user was required to input request, blocking the users view of what they were inputting
-
-Conclusion: The mock terminal requires a redesign to enable effective use on mobiles and any device with touch screen that may become visually blocked when using qwerty keyboard.
+### Testing conclusion
+This site underperforms on older devices and browsers. The issues are primarily driven by Django third-party packages and not general page design. The masonary bricks are also laggy on old devices and an alternative may work better.
 
 ## Final Code Validation
 HTML – all pages passed validation with no errors detected using the official [W3C HTML validator](https://validator.w3.org/). The summary of results can be found [here](assets/readme/html-validation.png)
 
 CSS – all pages passed validation with no errors detected using the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/). The summary of results can be found [here](assets/readme/css-valdation.png)
 
-JavaScript - 
+JavaScript - the game passed vaildation with no errors detected using [JS Hint](https://jshint.com/). The summary of results can be found [here](assets/readme/jshint_summary.png)
 
-Accessibility – all pages showed high accessibility using Chrome [Lighthouse DevTools](https://developer.chrome.com/docs/lighthouse/). The summary of results can be found [here](assets/readme/Lighthouse-validation.png)
+Accessibility – all pages showed high accessibility using Chrome [Lighthouse DevTools](https://developer.chrome.com/docs/lighthouse/). The summary of results can be found [here](assets/readme/Lighthouse-validation.png). It should be noted that there was significant impact on 'best practises' for pages displaying images from older installed version of Cloudinary as it sends immages over HTTP, not HTTPS.
 
 PYTHON - PEP8 validation: all .py files passed validation with no errors reported from [CI pep8 python linter](https://pep8ci.herokuapp.com/). This was carried out on all admin.py, apps.py, forms.py, models.py, tests.py, urls.py,views.py and the settings.py file.
 
 
 # Bugs
 ## Fixed
-- Gene_expression function print output occurs twice if user has selected to search again on deployed app. FIX: Cause unknown. Was present in first Heroku deployment and dissapeared after update. Logic for calling the function was changed anyway, to protect from similar bug occuring in future.
-- Validation of ensembl ID input not working. Does not detect change in length or incorrect format. FIX: Logic error - used ChatGPT to troubleshoot and adjust logic so that validation steps worked correctly.
-- App throws type error for search_selection(search_type) after introducing Genes as class and does not run past selecting search option. FIX: required inclusion of genes as input variable: search_selection(search_type, genes) in both function and when called in main.
-- No input for gene name search produces 'gene not found' message, not value error. FIX: created validate_name function to deal with empty field correctly.
+
+
+# Neutral resolution
+- Registration does not always show success message and reload back to home with logged in status. However, this seemed to be an issue on the oldest devices tested only and therefore marked as compatibility issue not as specific bug on site.
+  - Cloudinary serving over HTTP, not HTTPS, which gives a console warning. This requires an upgrade of Cloudinary, specifically changing the couldinary storage plugin. The cloudinary storage used was the one from the CI blog walkthrough, which does not enable HTTPS as default. This was beyond the inital scope of the project and is marked as a future feature.
 
 ## Unfixed
-- No bugs remaining
+
+
 
 # Deployment
 For deployment this project uses Heroku. The app was deployed to Heroku using the process described in the CI Django module coursework. 
@@ -273,8 +245,10 @@ I would also like to note that this app was developed during a period where I wa
 
 
 ## Media
+-	The icons such as like hearts and comment bubble are from [Font Awesome](https://fontawesome.com/)
 - The Github summary bar used in README.md is from [shields.io](https://shields.io/badges/)
 
 ## Acknowledgements
-- My wife, Megan, for help with testing and general emotional support while I was trying to study and code while also moving country.
+- My wife, Megan, for help with the wireframe design, product photography, site testing and general emotional support while I was trying to study and code while also moving relentlessly.
+- My mum for excellent testing assistance
 - My Mentor My mentor, Oluwafemi Medale , for his invaluable guidance and feedback.
