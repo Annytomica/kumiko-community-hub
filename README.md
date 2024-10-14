@@ -7,9 +7,6 @@ KCH is a vibrant community hub for individuals who are passionate about kumiko, 
 
 The live website can be accessed [here](https://kumiko-b16d8bc28246.herokuapp.com/) 
 
-
-![mock-up](assets/static/mock-up_amiresponsive.png)
-
 # Features
 
 ## Existing features
