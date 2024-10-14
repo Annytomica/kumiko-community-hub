@@ -60,7 +60,7 @@
     <nav class="pgn" aria-label="Page navigation">
         <ul class="pagination justify-content-center">
             {% if page_obj.has_previous %}
-            <li><a class="pgn__prev" href="?page={{ page_obj.previous_page_number }}">
+            <li><a class="pgn__prev" href="?page={{ page_obj.previous_page_number }}" aria-label="previous page">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path d="M12.707 17.293L8.414 13H18v-2H8.414l4.293-4.293-1.414-1.414L4.586 12l6.707 6.707z">
                         </path>
@@ -84,7 +84,7 @@
             {% endfor %}
 
             {% if page_obj.has_next %}
-            <li><a class="pgn__next" href="?page={{ page_obj.next_page_number }}">
+            <li><a class="pgn__next" href="?page={{ page_obj.next_page_number }}" aria-label="next page">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path d="M11.293 17.293l1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z">
                         </path>
