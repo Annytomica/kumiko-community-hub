@@ -22,47 +22,61 @@ The hero photography is if Kumiko projects carried out by Anny Devoy, with the p
 
 ### Logo
 The logo was designed by Megan Abel, a graphic designer and wife of the site owner. The logo reflects the style of kumiko panels while incorporationg the KCH intials of the Kumiko Community Hub.
+
 ![logo](static/images/kch-logo.png)
 
 ### Article Gallery
 The article gallery on the homepage displays cards of individual articles, with card heights varying according to excerpt length. The cards act as links to the full article. 
 #### Masonry brick animated cards
 The gallery from the Abstract template is based on Masonry which is a JavaScript grid layout library made by [David DeSandro](https://masonry.desandro.com/). It works by placing elements in optimal position based on available vertical space, like a mason fitting stones in a wall. This leads to a adaptive animation of the cards as screen size and card height changes. The card visual styling comes from the Abstract template.
+
 ![gallery](static/images/gallery.png)
+
 #### Pagination
 Gallery pagination is set to display of a maximum of 8 cards per page, with arrows and page numbers for navagation. The active page number is highlighted visually to assist user navagation.
+
 ![pagination](static/images/pagination.png)
 
 ### base.html
 The base.html contributes all page meta, css and js links plus Navbar, footer and alert messaging areas.
 #### Navbar
 The Navbar has KCH branding, links to Home, About and Contact on the right, and adaptive links to login/logout/register based on login status as well as a displaying a statement indicating login status. If logged in it contains username as part of 'you are logged in as...' statement.
+
 ![navbar](static/images/navbar.png)
+
 #### Footer
 The footer styling comes from Abstract template. It has a short description of KCH, links to pages and external social links, plus an invite to get in contact with a link to the contact form. It also has copyright and required acknowledgement to StyleShout for Abstract template usage.
+
 ![footer](static/images/footer.png)
 
 ### Single Article
 The single articles page displays a single article instance along with likes and comments associated with that article.
 #### Display of single article
 The page provides a stylised visual presentation of all Article model field entries, except slug, author and status. Author is not displayed as presently only the super-user can submit an article through the admin panel. Cloudinary is used to externally serve the images.
+
 ![article](static/images/article.png)
+
 #### Likes and comments counts
 Number of likes and approved comments are displayed at top of article, just above the article image.
 #### Approved comments
 Approved comments are displayed below the article. If the user is logged in and has a comment awaiting approval this will also appear in comments list. All comments made by the logged in user will also now display edit and delete buttons below to enable full CRUD functionality.
+
 ![comments](static/images/comments.png)
+
 #### Like button
 When logged in the like/unlike toggle button becomes visible. It toggles between outline (user has not liked article) and solid (user likes article). When solid it also add an increment of 1 to the likes counter.
 #### Comment form
 When logged in the comment form is displayed and the user can submit a comment. If the user wants to edit a comment the comment is displayed in the form to change and resubmit.
+
 ![comment_form](static/images/comment_form.png)
 
 ### About Us
 The about us page displays an about instance.
 #### Display of about
 The page provides a stylised visual presentation of all about model field entries. Cloudinary is used to externally serve the images.
+
 ![about](static/images/about.png)
+
 #### Register Banner
 The about page has a banner inviting new visitor to join the community and links to the sign-up page.
 
@@ -70,9 +84,12 @@ The about page has a banner inviting new visitor to join the community and links
 The contact page displays a contact instance.
 #### Display of contact
 The page provides a stylised visual presentation of all contact model field entries, except updated_on. Cloudinary is used to externally serve the images.
+
 ![contact](static/images/contact.png)
+
 #### Contact form
 The contact form allows a site visitor to send a message to teh site admin. There is no requirement for the user to be logged in for this action.
+
 ![contact_form](static/images/contact_form.png)
 
 ## Future features
@@ -111,9 +128,11 @@ In summary, is a social initiative to support a community space for people inter
 
 ## Data Models
 ### Project structure
+
 ![structure](static/images/project-structure.png)
 
 ### Data models ERD
+
 ![erd](static/images/erd.png)
 
 The data models used are summarised as follows:
