@@ -123,8 +123,9 @@ The app development, for each app included in the project, followed the steps ou
 ## General Strategy
 Functions were tested as they were developed by running within IDE server (Gitpod). The site was first deployed to Heroku once the project and first app (article) had minimal wireup. Regular deployments, 4-5 times a day were carried out as features were developed. In this way all features were tested during development on the deployed site as well as IDE server to ensure features not impacted by deployment. If changes to any static files were updated or added 'collectstatic' command was used in terminal before testing features. 
 
-All functions, including prescence of any validation messages, were tested after each deployment. 
-Final testing on last deployemnt after code validations was carried out by multiple individuals on multiple devices (phones and laptops of each tester) 
+All functions, including prescence of any validation messages, were tested after each deployment.
+
+Final testing was carried out on last deployment after all code validations was carried out. It was done by multiple individuals on multiple devices (phones and laptops of each tester).
 
 Core assessment criteria for all features were as follows:
 - That they work as expected
@@ -145,6 +146,8 @@ Before registering:
    - homepage pagination - do they work as expected and display correctly
    - make general notes on usability and loading/responsivness of each page
 
+Registration and beyond:
+
 2. Account registration
    - register an account - does this work and do you navigate to logged in state on homepage?
    - logout - do you get confirmation request that you want to logout?
@@ -162,13 +165,13 @@ Before registering:
 When logged in:
    - can the like button at bottom of article be seen?
    - can the like button be clicked to register article as liked
-      i. does the heart go dark to indicate like
-     ii. does the like counter increase by 1 to show registering of like
-    iii. do you get a confirmation of like being recieved?
+      - does the heart go dark to indicate like
+      - does the like counter increase by 1 to show registering of like
+      - do you get a confirmation of like being recieved?
    - can you unlike a liked article?
-      i. does the heart go empty to indicate no like
-     ii. does the like counter decrease by 1 to show removal of like
-    iii. do you get a confirmation of like being removed?
+      - does the heart go empty to indicate no like
+      - does the like counter decrease by 1 to show removal of like
+      - do you get a confirmation of like being removed?
 When logged out:
    - does the like button disappear?
    - can you still see the same number of registered likes?
@@ -177,24 +180,24 @@ When logged out:
 When logged in:
    - can the comment form at bottom of article be seen?
    - can a new comment be submitted?
-      i. does the comment appear in the comments list, marked as awaiting approval?
-     ii. do edit and delete buttons appear below the comment.
-    iii. do you get a confirmation of comment being submitted for approval?
-     iv. does the comment counter stay the same value (should only count approved comments)
-      v. do comments from other users lack the edit and delete buttons?
-     vi. can you submit multiple comments on same article?
+      - does the comment appear in the comments list, marked as awaiting approval?
+      - do edit and delete buttons appear below the comment.
+      - do you get a confirmation of comment being submitted for approval?
+      - does the comment counter stay the same value (should only count approved comments)
+      - do comments from other users lack the edit and delete buttons?
+      - can you submit multiple comments on same article?
    - can you edit a comment?
-      i. does clicking on the edit button fill the comment form with the message to be edited?
-     ii. does the submitted edit change the displayed comment?
-    iii. do you get a confirmation of comment being edited?
-     iv. does the comment counter stay the same value (an edit should not count as new comment)
+      - does clicking on the edit button fill the comment form with the message to be edited?
+      - does the submitted edit change the displayed comment?
+      - do you get a confirmation of comment being edited?
+      - does the comment counter stay the same value (an edit should not count as new comment)
    - can you delete a comment?
-      i. does clicking on the delete button get a pop-up asking for confirmation of deletion?
-     ii. do you get confirmation of deletion if you delete?
-    iii. do you return to previous state with no changes if you cancel delete?
-     iv. does the deleted comment dissapear from comments thread?
-      v. does the comment counter stay the same value if deleted comment was not yet approved?
-      vi. does comment counter decrease by 1 if deleted commented had been approved beforehand?
+      - does clicking on the delete button get a pop-up asking for confirmation of deletion?
+      - do you get confirmation of deletion if you delete?
+      - do you return to previous state with no changes if you cancel delete?
+      - does the deleted comment dissapear from comments thread?
+      - does the comment counter stay the same value if deleted comment was not yet approved?
+      - does comment counter decrease by 1 if deleted commented had been approved beforehand?
 When logged out:
    - does the comment form disappear?
    - do your own unapproved comments disapear (should only see approved comments)
