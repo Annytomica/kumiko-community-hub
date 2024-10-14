@@ -24,16 +24,16 @@ def single_article(request, slug):
 
     ``post``
         An instance of :model:`article.Article`.
-    
+
     ``article_comment``
         All comments related to the article
-    
+
     `` article_comment_count``
         A count of all approved comments to the article
-    
+
     ``article_likes``
         All likes related to the article
-    
+
     ``article_like_count``
         A count of all likes of the article
 
@@ -54,12 +54,12 @@ def single_article(request, slug):
     # Check if user already liked post
     user_like = None
     if request.user.is_authenticated:
-        user_like = ArticleLike.objects.filter(author=request.user, post=post).first()
+        user_like = ArticleLike.objects.filter(author=request.user,
+                                               post=post).first()
 
     # Initialize forms
     article_comment_form = ArticleCommentForm()
     article_like_form = ArticleLikeForm()
-
 
     if request.method == "POST":
         # comment form
@@ -74,7 +74,7 @@ def single_article(request, slug):
                     request, messages.SUCCESS,
                     'Comment submitted and awaiting approval'
                 )
-        
+
         # like/unlike
         elif 'like' in request.POST:
             article_like_form = ArticleLikeForm(data=request.POST)
@@ -83,32 +83,34 @@ def single_article(request, slug):
                     user_like.like = not user_like.like
                     user_like.save()
                     if user_like.like:
-                        messages.add_message(request, messages.SUCCESS, 'You liked this article.')
+                        messages.add_message(request, messages.SUCCESS,
+                                             'You liked this article.')
                     else:
-                        messages.add_message(request, messages.SUCCESS, 'You unliked this article.')
+                        messages.add_message(request, messages.SUCCESS,
+                                             'You unliked this article.')
 
                 else:
                     like = article_like_form.save(commit=False)
                     like.author = request.user
                     like.post = post
                     like.save()
-                    messages.add_message(request, messages.SUCCESS, 'You liked this article.')
+                    messages.add_message(request, messages.SUCCESS,
+                                         'You liked this article.')
 
         # Recalculate like count after changes
         article_likes_count = post.article_like.filter(like=True).count()
-    
 
     return render(
         request,
         "article/single_article.html",
         {"article": post,
-        "article_comments": article_comments,
-        "article_comment_count": article_comment_count,
-        "article_comment_form": article_comment_form,
-        "article_likes_count": article_likes_count,
-        "article_like_form": article_like_form,
-        "user_like": user_like,
-        },
+         "article_comments": article_comments,
+         "article_comment_count": article_comment_count,
+         "article_comment_form": article_comment_form,
+         "article_likes_count": article_likes_count,
+         "article_like_form": article_like_form,
+         "user_like": user_like,
+         },
     )
 
 
@@ -130,7 +132,8 @@ def article_comment_edit(request, slug, comment_id):
             comment.save()
             messages.add_message(request, messages.SUCCESS, 'Comment Updated!')
         else:
-            messages.add_message(request, messages.ERROR, 'Error updating comment!')
+            messages.add_message(request, messages.ERROR,
+                                 'Error updating comment!')
 
     return HttpResponseRedirect(reverse('single_article', args=[slug]))
 
@@ -147,6 +150,7 @@ def article_comment_delete(request, slug, comment_id):
         comment.delete()
         messages.add_message(request, messages.SUCCESS, 'Comment Deleted!')
     else:
-        messages.add_message(request, messages.ERROR, 'Nope, that was not your comment to delete!')
+        messages.add_message(request, messages.ERROR,
+                             'Nope, that was not your comment to delete!')
 
     return HttpResponseRedirect(reverse('single_article', args=[slug]))

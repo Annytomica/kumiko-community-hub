@@ -10,7 +10,6 @@ class ContactAdmin(SummernoteModelAdmin):
     summernote_fields = ()
 
 
-
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_on', 'read',)

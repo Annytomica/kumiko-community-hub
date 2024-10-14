@@ -7,6 +7,3 @@ from .models import About
 class AboutAdmin(SummernoteModelAdmin):
     list_display = ('opening',)
     summernote_fields = ('body',)
-
-
-# Register your models here.

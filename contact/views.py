@@ -3,18 +3,20 @@ from django.contrib import messages
 from .models import Contact
 from .forms import ContactMessage
 
+
 # Create your views here.
 def contact_me(request):
-    """ 
+    """
     Renders the most recent information about the website
     and allows user feedback
     Displays an individual instance of :model:`contact.Contact`.
-    
+
     **Context**
     ``contact``
         The most recent instance of :model:`contact.Contact`.
     ``contact_message``
         An instance of :form`contact.ContactMessage`.
+
     **Template**
     :template:`contact/contact.html`
     """
@@ -26,8 +28,7 @@ def contact_me(request):
             messages.add_message(
                 request, messages.SUCCESS,
                 "Feedback received! Thank You!")
-    
-    
+
     """
     Renders the About page
     """
@@ -39,6 +40,5 @@ def contact_me(request):
         request,
         "contact/contact.html",
         {"contact": contact,
-        "contact_message": contact_message,},
+         "contact_message": contact_message, },
     )
-
