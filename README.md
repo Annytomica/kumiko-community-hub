@@ -56,7 +56,7 @@ Present navigation back and forth on pages is limited. An ability to paginate th
 # App design process
 
 ## Rationale
-A full site project outline can be viewed [here]()
+A full site project outline can be viewed [here](https://docs.google.com/document/d/1W2LfAeY3Gkv_EZSodBBBzSgNinVPhwcOKg3yjh0x3Fs/edit?usp=sharing)
 
 In summary, is a social initiative to support a community space for people interested in the Japanese woodcraft of Kumiko - detailed geometric wood panels for interior decoration applications. It is for those who have a background in woodcraft including Japanese joinery and Kumiko or who want to learn. The site allows users to access and share information about Kumiko and related resources.
 
@@ -70,10 +70,10 @@ In summary, is a social initiative to support a community space for people inter
 
 ## Data Models
 ### Project structure
-![structure](assets/static/app_flowchart.png)
+![structure](static/images/project-structure.png)
 
 ### Data models ERD
-![erd](assets/static/app_flowchart.png)
+![erd](static/images/erd.png)
 
 The data models used are summarised as follows:
 Article:
@@ -121,31 +121,108 @@ The app development, for each app included in the project, followed the steps ou
 # Testing
 
 ## General Strategy
-Functions were tested as they were developed by running run.py within IDE terminal (Gitpod). The app was only deployed to Heroku once all gene name search and general functions were developed. The ensembl ID search functions were added after deployment, with initial function testing still carried out in IDE terminal. 
+Functions were tested as they were developed by running within IDE server (Gitpod). The site was first deployed to Heroku once the project and first app (article) had minimal wireup. Regular deployments, 4-5 times a day were carried out as features were developed. In this way all features were tested during development on the deployed site as well as IDE server to ensure features not impacted by deployment. If changes to any static files were updated or added 'collectstatic' command was used in terminal before testing features. 
 
-All functions, including validation steps were tested after each deployment. Testing steps were as follows:
-1. search selection
-    - test if correct gene name and ID selections work
-    - test if incorrect input of no input (''), word (mouse), letter (p) and wrong number (5) failed validation and gave correct value error message
+All functions, including prescence of any validation messages, were tested after each deployment. 
+Final testing on last deployemnt after code validations was carried out by multiple individuals on multiple devices (phones and laptops of each tester) 
 
-2. gene name search
-    - test if valid gene name (fus) produced correct gene expression output
-    - test if invalid gene (moby) produced the correct 'gene not found' response
-    - test if empty field produced correct error message
+Core assessment criteria for all features were as follows:
+- That they work as expected
+- That you get a little feedback message at the top of the page if you successfully do something
+- That you get a pop-up to confirm action if you are doing something negative like logout or delete a comment.
+- That you get the expected visual changes to the site 
 
-3. ensembl ID search
-    - test if valid ID (ENSMUSG00000032047) produced correct gene expression output
-    - test if ID validation worked correctly by identifying:
-        - no input ('')
-        - not an ID (fus)
-        - not 18 characters (ENSMUSG000000320)
-        - ENSMUSG start wrong (ENSMUPG00000032047)
-        - last 11 characters not numbers (ENSMUSG0000003204m)
-        - input begins with empty space before ID ( ENSMUSG00000032047)
+The final testing steps were as follows:
 
-4. search again/ exit
-    - test if valid input starts search again or produces thank you messsage on exit correctly
-    - test if incorrect input of no input (''), word (mouse), letter (p) and wrong number (5) failed validation and gave correct value error message
+Before registering:
+1. Check basic page navagation and links for all pages work as expected. To check:
+   - Navbar (standard and mobile dropdown menu)
+   - Footer
+   - sign-up banners (home and about pages) take you to register page
+   - sign-in link to sign-up page
+   - sign-up link to sign-in page
+   - homepage article thumbnail to single article page - does correct article load?
+   - homepage pagination - do they work as expected and display correctly
+   - make general notes on usability and loading/responsivness of each page
+
+2. Account registration
+   - register an account - does this work and do you navigate to logged in state on homepage?
+   - logout - do you get confirmation request that you want to logout?
+   - is logout successful with a small 'you have logged out' message sent
+   - login - do you successfully log back in using new user credentials
+   - does the navbar update to reflect logged in/logged out status
+   - can you see your user-name displayed in navbar if logged in
+
+3. Contact Page contact form
+   - while logged out send a message that says 'this is a logged out message' - do you get a confirmation message of it being sent?
+   - while logged in send another message that says 'this is a logged in message' - do you get a confirmation message of it being sent?
+   - site admin checks and confirms both messages stored and can be marked as read
+
+4. Single article page likes
+When logged in:
+   - can the like button at bottom of article be seen?
+   - can the like button be clicked to register article as liked
+      i. does the heart go dark to indicate like
+     ii. does the like counter increase by 1 to show registering of like
+    iii. do you get a confirmation of like being recieved?
+   - can you unlike a liked article?
+      i. does the heart go empty to indicate no like
+     ii. does the like counter decrease by 1 to show removal of like
+    iii. do you get a confirmation of like being removed?
+When logged out:
+   - does the like button disappear?
+   - can you still see the same number of registered likes?
+
+5. Single article page comments
+When logged in:
+   - can the comment form at bottom of article be seen?
+   - can a new comment be submitted?
+      i. does the comment appear in the comments list, marked as awaiting approval?
+     ii. do edit and delete buttons appear below the comment.
+    iii. do you get a confirmation of comment being submitted for approval?
+     iv. does the comment counter stay the same value (should only count approved comments)
+      v. do comments from other users lack the edit and delete buttons?
+     vi. can you submit multiple comments on same article?
+   - can you edit a comment?
+      i. does clicking on the edit button fill the comment form with the message to be edited?
+     ii. does the submitted edit change the displayed comment?
+    iii. do you get a confirmation of comment being edited?
+     iv. does the comment counter stay the same value (an edit should not count as new comment)
+   - can you delete a comment?
+      i. does clicking on the delete button get a pop-up asking for confirmation of deletion?
+     ii. do you get confirmation of deletion if you delete?
+    iii. do you return to previous state with no changes if you cancel delete?
+     iv. does the deleted comment dissapear from comments thread?
+      v. does the comment counter stay the same value if deleted comment was not yet approved?
+      vi. does comment counter decrease by 1 if deleted commented had been approved beforehand?
+When logged out:
+   - does the comment form disappear?
+   - do your own unapproved comments disapear (should only see approved comments)
+   - do edit and delete buttons disappear?
+   - can you still see the same number of comments on counter?
+   - on the gyokucho saw review article can you see the comment from kumiko_admin that says 'you should not see this comment as it is not approved'? (you shouldn't)
+
+6. Superuser Admin
+   - can you view and approve comments
+   - can you view and mark as read messages from contact page from both logged in and logged out users
+Articles:
+   - can you submit an article
+   - is the article immediately added to deployed site and displayed correctly?
+   - can you edit an article and do changes display on site after saving
+   - can you delete an article and does the article dissapear from site immediately
+   - does the default image display if no image file is provided?
+About:
+   - can you submit content for about us page
+   - is the content immediately added to deployed site and displayed correctly?
+   - can you edit about content and do changes display on site after saving
+   - can you delete about content (leads to empty page with no content on site)
+   - does the default image display if no image file is provided?
+Comment:
+   - can you submit content for contact page
+   - is the content immediately added to deployed site and displayed correctly?
+   - can you edit contact content and do changes display on site after saving
+   - can you delete contact content (leads to empty page with no content on site)
+   - does the default image display if no image file is provided?
 
 ## Devices and Browsers
 
@@ -158,36 +235,64 @@ Chrome (primary), Firefox , Edge
 - Desktop screens: BenQ PD series 27”
 
 ## Testing Summary
-The site worked on all devices and browsers tested, but issues were found on older devices. 
-The biggest issue identified was the Django authorisation forms (register in particlular) which did not always perform as intended and submit details correctly. Secondary, the interaction of classes from the Abstract template did cause fucntinal bugs at times and required significant troubleshooting to identify.
+- During early testing phases, the interaction of classes from the Abstract template did cause functional bugs at times and required significant troubleshooting to identify.
+- The site worked on all devices and browsers tested, but issues were found on older devices. 
+- Two bugs were found which are reported in the Bugs section, these relate to like and comment submissions.
+- Recommendations for readability of login/register links in login/register forms was taken into account and changes make to improve.
+- Besides the bugs the biggest issue identified was the Django authorisation forms (register in particlular) which did not always perform as intended and submit details correctly. This issue was present on very old devices only and may have been a soft/hardware compatability issue.
 
-![testing-table](assets/static/testing-table.png)
+Testing summarised below - green = behaves as expected, orange = works but behaviour not as expected, red = does not work
+
+![testing-table](static/images/testing-table.png)
 
 ### Testing conclusion
 This site underperforms on older devices and browsers. The issues are primarily driven by Django third-party packages and not general page design. The masonary bricks are also laggy on old devices and an alternative may work better.
 
 ## Final Code Validation
-HTML – all pages passed validation with no errors detected using the official [W3C HTML validator](https://validator.w3.org/). The summary of results can be found [here](assets/readme/html-validation.png)
+HTML – all pages passed validation with no errors detected using the official [W3C HTML validator](https://validator.w3.org/). The summary of results can be found [here](static/images/html_validatons.pdf)
 
-CSS – all pages passed validation with no errors detected using the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/). The summary of results can be found [here](assets/readme/css-valdation.png)
+CSS – all pages passed validation with no errors detected using the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/). The summary of results can be found [here](static/images/css_validatons.pdf)
 
-JavaScript - the game passed vaildation with no errors detected using [JS Hint](https://jshint.com/). The summary of results can be found [here](assets/readme/jshint_summary.png)
+JavaScript - the game passed vaildation with no errors detected using [JS Hint](https://jshint.com/). The summary of results can be found [here](static/images/js_validatons.pdf)
 
-Accessibility – all pages showed high accessibility using Chrome [Lighthouse DevTools](https://developer.chrome.com/docs/lighthouse/). The summary of results can be found [here](assets/readme/Lighthouse-validation.png). It should be noted that there was significant impact on 'best practises' for pages displaying images from older installed version of Cloudinary as it sends immages over HTTP, not HTTPS.
+Accessibility – all pages showed high accessibility using Chrome [Lighthouse DevTools](https://developer.chrome.com/docs/lighthouse/). The summary of results can be found [here](static/images/lighthouse.pdf). It should be noted that there was significant impact on 'best practises' for pages displaying images from older installed version of Cloudinary as it sends immages over HTTP, not HTTPS. Anupgrade to newer coloudinary version is part of future features.
 
 PYTHON - PEP8 validation: all .py files passed validation with no errors reported from [CI pep8 python linter](https://pep8ci.herokuapp.com/). This was carried out on all admin.py, apps.py, forms.py, models.py, tests.py, urls.py,views.py and the settings.py file.
 
 
 # Bugs
 ## Fixed
+- Comment edit submitting new comment not changing old.
+Description:
+The submit process for edit not working and commentForm attribute not being assigned to allow submission of change. Is submitted as a new comment.
+Resolution:
+Found typo in submitButton single_article.html, but major issue was that the Abstract Id of contactForm was conflicting with the commentForm Id that needed to be identified to setAttribute of action="edit_comment" to change button action from submit to edit. The contactForm Id was removed to resolve.
 
+- Nav dropdown menu not working and hiding logo
+Description:
+Conflicting styling causing dropdown menu on small screens to not align properly and hide logo and close button
+Resolution:
+changed logo file to webp and smaller dimensions. Removed abstract classes from nav elements as causing clashing with styling and menu issues. Added custom css to style.css to override how abstract css deals with navbar images (logo).
 
-# Neutral resolution
+- Comment submission also submits like
+Description:
+When submitting a new comment the submission also submits a like.
+Resolution:
+Separated POST actions in views.py by ensuring comments actions only occurred when 'body' field included in submit, and like actions only when 'like' included.
+
+- Can see unapproved comments
+Description:
+Can view other users unapproved comments
+Resolution:
+Lacked the conditional classes in comment view area in single_article.html. The conditional statement was added, such that if unapproved and author - message faded, if unapproved and not author - message hidden
+
+#### Neutral resolution
 - Registration does not always show success message and reload back to home with logged in status. However, this seemed to be an issue on the oldest devices tested only and therefore marked as compatibility issue not as specific bug on site.
   - Cloudinary serving over HTTP, not HTTPS, which gives a console warning. This requires an upgrade of Cloudinary, specifically changing the couldinary storage plugin. The cloudinary storage used was the one from the CI blog walkthrough, which does not enable HTTPS as default. This was beyond the inital scope of the project and is marked as a future feature.
 
 ## Unfixed
-
+- first like does not register but does give a success message. Second and following attempts work fine.
+- comment does not clear from form after submission. This is a new error that was not present in previous deployments. Will need to check not accidental typo caused by edits from code validations (JShint and Pep8 linter).
 
 
 # Deployment
@@ -204,7 +309,7 @@ In summary:
 3. The app was then deployed by connecting the corect GitHub repo (kumiko-community-hub) and selecting manual deployment option for the first deployment.
 4. The deployment setting was changed to automatic once the majority of functions had been written and tested.
 
-If you wish to develop this app further, feel free. To do this, create a fork of this repository and save it to your own github profile. To do this, use the fork button at the top right of this repository. This brings you to a new window, where you select yourself as the owner and can add extra details to name and description of the repo. You will then, if required, deploy to your own Heroku account using the process described above. You will also need to generate you own env.py and config var values to ensure all featuires will work. If you chose to do this, please be respectful and credit me as the origin of this project and code.
+If you wish to develop this app further, feel free. To do this, create a fork of this repository and save it to your own github profile. To do this, use the fork button at the top right of this repository. This brings you to a new window, where you select yourself as the owner and can add extra details to name and description of the repo. You will then, if required, deploy to your own Heroku account using the process described above. You will also need to generate you own env.py and Heroku config var values to ensure all featuires will work. If you chose to do this, please be respectful and credit me as the origin of this project and code.
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Annytomica/kumiko-community-hub)
 ![GitHub top language](https://img.shields.io/github/languages/top/Annytomica/kumiko-community-hub?color=yellow)
@@ -215,7 +320,7 @@ If you wish to develop this app further, feel free. To do this, create a fork of
 # Credits
 I would like to acknowledge and thank the following people and resources used in the creation of this site.
 
-I would also like to note that this app was developed during a period where I was effectively homeless amd couch surfing with friends and family. I was deprived of reliable internet connections and ideal work spaces for significant periods of time. As such normal support routes of mentor meetings and tutoring, were not always available and ChatGPT was used as a replacement. While no code was directly generated by ChatGPT it does write out corrections for exisiting code, in a way that mentors and tutors do not, and I would like to acknowledge this fact.
+I would also like to note that this app was developed during a period where I was effectively homeless amd couch surfing with friends and family. I was deprived of reliable internet connections and ideal work spaces for significant periods of time. As such, normal support routes of mentor meetings and tutoring were not always available and ChatGPT was used as a replacement. While no code was directly generated by ChatGPT it does write out corrections for exisiting code, in a way that mentors and tutors do not, and I would like to acknowledge this fact.
 
 ## Content
 ### Large contributions
@@ -245,10 +350,11 @@ I would also like to note that this app was developed during a period where I wa
 
 
 ## Media
+- The photographs were taken by Megan Abel, my wife, who gave permission for thier use.
 -	The icons such as like hearts and comment bubble are from [Font Awesome](https://fontawesome.com/)
 - The Github summary bar used in README.md is from [shields.io](https://shields.io/badges/)
 
 ## Acknowledgements
 - My wife, Megan, for help with the wireframe design, product photography, site testing and general emotional support while I was trying to study and code while also moving relentlessly.
 - My mum for excellent testing assistance
-- My Mentor My mentor, Oluwafemi Medale , for his invaluable guidance and feedback.
+- My mentor, Oluwafemi Medale , for his invaluable guidance and feedback and intital introduction to the concept of agile chores.
