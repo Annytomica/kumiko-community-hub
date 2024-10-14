@@ -91,7 +91,8 @@
                     <h3>{{ article_comment_count }} Comments</h3>
                     <ol class="commentlist">
                         {% for comment in article_comments %}
-                        <li class="depth-1 comment">
+                        <li class="depth-1 comment {% if not comment.approved and comment.author == user %}
+                        faded{% elif not comment.approved %} d-none{% endif %}">
                             <div class="comment__avatar">
                                 <img src="{% static 'images/kch-user-icon-05.webp' %}" class="avatar" 
                                 alt="user-icon" width="50" height="50">
