@@ -325,13 +325,45 @@ PYTHON - PEP8 validation: all .py files passed validation with no errors reporte
 
 # Bugs
 ## Fixed
-- Gene_expression function print output occurs twice if user has selected to search again on deployed app. FIX: Cause unknown. Was present in first Heroku deployment and dissapeared after update. Logic for calling the function was changed anyway, to protect from similar bug occuring in future.
-- Validation of ensembl ID input not working. Does not detect change in length or incorrect format. FIX: Logic error - used ChatGPT to troubleshoot and adjust logic so that validation steps worked correctly.
-- App throws type error for search_selection(search_type) after introducing Genes as class and does not run past selecting search option. FIX: required inclusion of genes as input variable: search_selection(search_type, genes) in both function and when called in main.
-- No input for gene name search produces 'gene not found' message, not value error. FIX: created validate_name function to deal with empty field correctly.
+- Comment edit submitting new comment not changing old.
+Description:
+The submit process for edit not working and commentForm attribute not being assigned to allow submission of change. Is submitted as a new comment.
+Resolution:
+Found typo in submitButton single_article.html, but major issue was that the Abstract Id of contactForm was conflicting with the commentForm Id that needed to be identified to setAttribute of action="edit_comment" to change button action from submit to edit. The contactForm Id was removed to resolve.
+
+- Nav dropdown menu not working and hiding logo
+Description:
+Conflicting styling causing dropdown menu on small screens to not align properly and hide logo and close button
+Resolution:
+changed logo file to webp and smaller dimensions. Removed abstract classes from nav elements as causing clashing with styling and menu issues. Added custom css to style.css to override how abstract css deals with navbar images (logo).
+
+- Comment submission also submits like
+Description:
+When submitting a new comment the submission also submits a like.
+Resolution:
+Separated POST actions in views.py by ensuring comments actions only occurred when 'body' field included in submit, and like actions only when 'like' included.
+
+- Can see unapproved comments
+Description:
+Can view other users unapproved comments
+Resolution:
+Lacked the conditional classes in comment view area in single_article.html. The conditional statement was added, such that if unapproved and author - message faded, if unapproved and not author - message hidden
+
+- First article like does not register
+Description:
+First like does not register but does give a success message. Second and following attempts work fine.
+Resolution:
+First instance of user_like was not changing default value of False to True. This was resolved in single_article view by adding the statement 'like.like = True'
+
+#### Neutral resolution
+- Registration does not always show success message and reload back to home with logged in status. However, this seemed to be an issue on the oldest devices tested only and therefore marked as compatibility issue not as specific bug on site.
+- Cloudinary serving over HTTP, not HTTPS, which gives a console warning. This requires an upgrade of Cloudinary, specifically changing the couldinary storage plugin. The cloudinary storage used was the one from the CI blog walkthrough, which does not enable HTTPS as default. This was beyond the inital scope of the project and is marked as a future feature.
 
 ## Unfixed
-- No bugs remaining
+
+- comment does not clear from form after submission. This is a new error that was not present in previous deployments. Will need to check not accidental typo caused by edits from code validations (JShint and Pep8 linter). This bug does not occur when run from gitpod server, so could be an error during deployment. May resolve with new push to repo and redeployment.
+- first like is registered in model correctly but update of icon to solid heart on article page does not occur.
+
 
 # Deployment
 For deployment this project uses Heroku. The app was deployed to Heroku using the process described in the CI Django module coursework. 
