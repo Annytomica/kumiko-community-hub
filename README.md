@@ -41,7 +41,9 @@ The base.html contributes all page meta, css and js links plus Navbar, footer an
 #### Navbar
 The Navbar has KCH branding, links to Home, About and Contact on the right, and adaptive links to login/logout/register based on login status as well as a displaying a statement indicating login status. If logged in it contains username as part of 'you are logged in as...' statement.
 
-![navbar](static/images/navbar.png)
+![navbar_screen](static/images/navbar_screen.png)
+
+![navbar_tablet](static/images/navbar_tablet.png)
 
 #### Footer
 The footer styling comes from Abstract template. It has a short description of KCH, links to pages and external social links, plus an invite to get in contact with a link to the contact form. It also has copyright and required acknowledgement to StyleShout for Abstract template usage.
