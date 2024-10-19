@@ -43,6 +43,8 @@ The Navbar has KCH branding, links to Home, About and Contact on the right, and 
 
 ![navbar_screen](static/images/navbar_screen.png)
 
+The small screen navbar drops down from top, with navagation to left and login/logout status and links to right.
+
 ![navbar_tablet](static/images/navbar_tablet.png)
 
 #### Footer
