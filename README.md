@@ -7,216 +7,362 @@ KCH is a vibrant community hub for individuals who are passionate about kumiko, 
 
 The live website can be accessed [here](https://kumiko-b16d8bc28246.herokuapp.com/) 
 
-
-![mock-up](assets/static/mock-up_amiresponsive.png)
+![home](static/images/home.png)
 
 # Features
 
 ## Existing features
+### Abstract template from StyleShout
+The site layout is adapted from the free bootstrap template from [StyleShout](https://styleshout.com/abstract-modern-masonry-blog-website-template/) called Abstract. It has a very clean, minimal style and a great gallery display design.
 
-### Introduction and search options
-The app loads and presents the user with a brief introduction to the app and explanation of its purpose. 
+### Hero banner
+The hero photography is if Kumiko projects carried out by Anny Devoy, with the photograpgy by Megan Abel. It has a very simple message about the core principles of the community and invites people to join. The hero is a picture element, with differnt images to make efficiently responsive to screen size.
+![large hero image](static/images/kch-hero_image-1200px-2.webp)
 
-It then introduces the choices of method to search the database, using either gene name or Ensembl ID. This is followed by the prompt for the user to chose which search method they would like to use.
+### Logo
+The logo was designed by Megan Abel, a graphic designer and wife of the site owner. The logo reflects the style of kumiko panels while incorporationg the KCH intials of the Kumiko Community Hub.
 
-![intro](assets/static/intro.png)
+![logo](static/images/kch-logo.png)
 
-### Gene search request
-The two search methods have different validation steps for user input, before providing the same output if the search is successful.
+### Article Gallery
+The article gallery on the homepage displays cards of individual articles, with card heights varying according to excerpt length. The cards act as links to the full article. 
+#### Masonry brick animated cards
+The gallery from the Abstract template is based on Masonry which is a JavaScript grid layout library made by [David DeSandro](https://masonry.desandro.com/). It works by placing elements in optimal position based on available vertical space, like a mason fitting stones in a wall. This leads to a adaptive animation of the cards as screen size and card height changes. The card visual styling comes from the Abstract template.
 
-#### Validation
-If the user does not input an appropriate value, input validation will provide an error message and request the user try again.
+![gallery](static/images/gallery.png)
 
-![choice-error](assets/static/incorrect_search_choice.png)
+#### Pagination
+Gallery pagination is set to display of a maximum of 8 cards per page, with arrows and page numbers for navagation. The active page number is highlighted visually to assist user navagation.
 
-#### Gene Name
-After intial selection, if valid, the user recieves a confirmation of their choice and a prompt to enter the gene name.
+![pagination](static/images/pagination.png)
 
-![enter-gene](assets/static/gene-name_initial-choice.png)
+### base.html
+The base.html contributes all page meta, css and js links plus Navbar, footer and alert messaging areas.
+#### Navbar
+The Navbar has KCH branding, links to Home, About and Contact on the right, and adaptive links to login/logout/register based on login status as well as a displaying a statement indicating login status. If logged in it contains username as part of 'you are logged in as...' statement.
 
-Validation of gene name:
-The only validation was checking is user had not hit enter without entering a gene name, which produces the following error message.
+![navbar](static/images/navbar.png)
 
-![empty-field](assets/static/empty-field.png)
+#### Footer
+The footer styling comes from Abstract template. It has a short description of KCH, links to pages and external social links, plus an invite to get in contact with a link to the contact form. It also has copyright and required acknowledgement to StyleShout for Abstract template usage.
 
-This is because gene names can be a mix of letters and numbers and of variable character length. An improvement of this validation is discussed in future features.
+![footer](static/images/footer.png)
 
-If the name is not found in the database the following message is displayed - explaining why it may not have been be found - along with provision to search again or exit.
+### Single Article
+The single articles page displays a single article instance along with likes and comments associated with that article.
+#### Display of single article
+The page provides a stylised visual presentation of all Article model field entries, except slug, author and status. Author is not displayed as presently only the super-user can submit an article through the admin panel. Cloudinary is used to externally serve the images.
 
-![not-in-dataset](assets/static/not-in-dataset-message.png)
+![article](static/images/article.png)
 
-#### Ensembl ID
-After intial selection, if valid, the user recieves a confirmation of their choice and a prompt to enter the ensembl ID. This ID has a very specific format and so the criteria for the ID are set out for the user to minimise input error.
+#### Likes and comments counts
+Number of likes and approved comments are displayed at top of article, just above the article image.
+#### Approved comments
+Approved comments are displayed below the article. If the user is logged in and has a comment awaiting approval this will also appear in comments list. All comments made by the logged in user will also now display edit and delete buttons below to enable full CRUD functionality.
 
-![enter-ensembl](assets/static/ensembl_initial-choice.png)
+![comments](static/images/comments.png)
 
-Validation of ensembl ID: As the ID has a very specific format, the validation confirms that the user input:
-1. That is starts with the correct ensembl mouse gene
-nomenclature of ENSMUSG
-2. That it is 18 characters long
-3. That the last 11 characters are numbers
+#### Like button
+When logged in the like/unlike toggle button becomes visible. It toggles between outline (user has not liked article) and solid (user likes article). When solid it also add an increment of 1 to the likes counter.
 
-If the user input is not validated the following error message is displayed and the user is prompted to input the ID again.
+![likes](static/images/likes.png)
 
-![wrong-ensembl](assets/static/incorrect-ensembl.png)
+#### Comment form
+When logged in the comment form is displayed and the user can submit a comment. If the user wants to edit a comment the comment is displayed in the form to change and resubmit.
 
-### Output
-If the gene, searched via name or ID, is found in the database the user recieves a tabulated result and summary statement of the result.
+![comment_form](static/images/comment_form.png)
 
-![result](assets/static/output-result.png)
+### About Us
+The about us page displays an about instance.
+#### Display of about
+The page provides a stylised visual presentation of all about model field entries. Cloudinary is used to externally serve the images.
 
-Below this, the user is also presented with an explainer, providing information on how to interpret result.
+![about](static/images/about.png)
 
-![explainer](assets/static/output-explanation.png)
+#### Register Banner
+The about page has a banner inviting new visitor to join the community and links to the sign-up page.
 
-### Search another gene or exit
-After a successful or unsuccessful (but valid) gene search, the user is provided with the opportunity to search for another gene or exit the app. 
-If they choose to search again they receive the same menu choice at start of app:
-![search-again](assets/static/search-again.png)
+### Contact
+The contact page displays a contact instance.
+#### Display of contact
+The page provides a stylised visual presentation of all contact model field entries, except updated_on. Cloudinary is used to externally serve the images.
 
-If they choose to exit, they recieve a short thank you message
+![contact](static/images/contact.png)
 
-![exit-message](assets/static/exit-message.png)
+#### Contact form
+The contact form allows a site visitor to send a message to the site admin. There is no requirement for the user to be logged in for this action.
 
 ## Future features
-### Multiple gene search
-Allow a user to input several gene names/IDs into a single search to save time. This feature requires each entry to be seperated, validated and processed individually before all output brought togther at the end. This also allows the user to make easy comparisons between genes.
+### User submitted projects gallery
+A key future development, given kumiko is a very visual craft/artform, it to provide community members an opportunity to share images of thier own projects with a short description. This would allow members to submit an image and short description, which would get displayed in a community gallery after admin approval. The gallery would have smaller cards than article gallery and users cn click on card to open a modal (instagram-style) to read full description and leace commments and likes. The ability to like a project straiht off the card would also be important.
 
-### Validation of gene name/ID against all known genes
-To extend the accuracy of validating a correct gene name or ensembl ID a worksheet that contains all known mouse genes and associated ID's will be generated and included. This would allow the statement that the gene exists but is not dysregulated in this model to be made which is very useful.
+### Homepage that displays selction of articles and user submitted projects
+Once community project submissions are enabled the homepage shows a selection of both articles and submitted projects, with new projects and articles gallerys on seperate pages with pagentation.
 
-### Expand number of databases to search
-Include other motor neuron disease gene expression databases. This allows user to compare genes between databases and allows user to see if expression changes are consistent across all databases (reliable result) or present in some or one database (less reliable result).
+### Conversation Threads
+The ability to respnd to a comment directly and start a discussion thread from that comment. Presently all comments are independent
 
-### Enable copy and paste to mock terminal
-Presently the terminal does not accept a copy and pasted entry. This is problematic for the ensembl ID in particular as manual entry of this 18 character ID significantly increases the chance of user error with input. It would also be essential to have once multiple gene search is available.
+### Display of like and comment counts on gallery cards
+An ability to display the like and comment counts on the gallery cards would improve user experience and engagement, enticing users to indicate thier feelings and commments.
 
-### Redesign mock terminal for use on mobiles
-Testing identified that the mock terminal was not suitable for running the app on small or touchscreens. To make the app more accessible to all devices adaptive sizing for mock terminal will be added.
+### Update Django-cloudinary to newer version 
+To allow presentation of images via HTTPS, not HTTP. Use of HTTP gives a warning in the console and significantly reduces the Lighthouse score for best practises for all pages displaying a Cloudinary-stored image.
 
+### Increase user navigation ability
+Present navigation back and forth on pages is limited. An ability to paginate through articles from the single article page would make a nice improvement to UX.
 
 # App design process
 
 ## Rationale
-Searching for expression changes in genes of interest is difficult for interested readers of the original publication. The original gene expression data is only accessible from a secondary pdf document provided as supplimentary data from the publishing house website OR by downloading the raw expression data from a data repository and carrying out your own analysis. 
+A full site project outline can be viewed [here](https://docs.google.com/document/d/1W2LfAeY3Gkv_EZSodBBBzSgNinVPhwcOKg3yjh0x3Fs/edit?usp=sharing)
 
-To resolve this issue, and make the information more accessible, a console-based app has been developed using python. This app allows the user to simply input a gene name and they will be provided with the relevant gene expression for thier query.
+In summary, is a social initiative to support a community space for people interested in the Japanese woodcraft of Kumiko - detailed geometric wood panels for interior decoration applications. It is for those who have a background in woodcraft including Japanese joinery and Kumiko or who want to learn. The site allows users to access and share information about Kumiko and related resources.
 
 ## Goal
- A console based app that:
+ A website that:
  - is user friendly and intuitive
- - provides requested data quickly
- - provides the expression data in a format that is easy to understand and interpret
- - provides appropriate error feedback and explanation if users input is not matched in dataset
+ - provides useful information to the community
+ - encourages sharing of information through comments and messages to site admin
+ - encourages engagement and support through ability to 'like' content
+ - Has easy interface for site adim to upload new articles with auto-formatting of content
 
-## Data Model
-The data model used is the Genes class. 
+## Data Models
+### Project structure
 
-The Genes class holds all the relevant information for each gene in the Googlesheets database : Gene name, Ensembl ID, Gene expression, Siginficance value (p-value).
+![structure](static/images/project-structure.png)
 
-The class also has method, gene_expression(), to produce a result output for a valid gene query, either via gene name or ensembl ID, to the app user.
+### Data models ERD
 
-Choosing this data model enables easy expansion of app to include new datasets in the future.
+![erd](static/images/erd.png)
 
-## Design of information processing flow
-A flowchart of the steps in information processing that the app needed to follow was mapped out in Figma.
-![flowchart](assets/static/app_flowchart.png)
-This flowchart was used to guide the development of functions and processes within the app. As the app was built and changes were made to the flow of the app, the flow chart was adjusted accordingly.
+The data models used are summarised as follows:
+Article:
+- article: stores all information for presenting a single article
+- article like: stores like status for single article 
+- article comment: stores comments for single article
+
+About:
+- about: stores all information for presenting a single about us page
+
+Contact:
+- contact: stores all information for presenting a single contact page
+- contact form: stores message from user for admin to view
+
 
 ## Development process
-The app development followed the logical flow outlined in the flowchart, with steps outlined below:
-1. linked googlesheet database and created constants from data
-2. intro and search type selection
-3. search type validation
-4. gene name search
-5. gene expression output
-6. new search or exit
-7. ensembl ID search and validation
-8. introduction of Gene class and function refactoring
-
-The Gene class was added at a late stage in development as inclusion of a data model was intially missed from the app design. As all functions were already working, this refactoring required minimal change to app structure and functions.
+The app development, for each app included in the project, followed the steps outlined below:
+1. create app in kumiko Django project
+2. Do mminimum wireup of settings.py, views.py and urls.py and creating html template as defined in SI coursework
+3. Set up models and link to views and urls
+4. test model in admin panel
+5. Create appropriate views in views.py to display information stored in database model. One view taken through dev steps 5-9 at one time and then process repeated for next.
+6. create appropriate form method in forms.py if required for view
+7. add view specific html to template to display the view on the website
+8. deploy changes (with collect static) to test views on deployed site
+9. Final testing of fully completed app
 
 # Technologies
-- Python - all app functions
+- Django - all app functions
+- Bootstrap
+- HTML/CSS/JS
+- Cloudinary
+- Django-crispy-forms
+- gunicorn - for Heroku deployment of Django project
+- Django-allauth - for user validation
+- Django-summernote - for auto text area formatting assistance
+- whitenoise
 - Figma – flowchart development
-- Photoshop - Readme image processing
+- Photoshop - image processing
 - ChatGPT - troubleshooting, typo finding and logic problems
 - Heroku - app deployment and hosting
+- google docs, sheets and slides
 - UI.dev – amiresponsive was used to create site mockup images.
 
 # Testing
 
 ## General Strategy
-Functions were tested as they were developed by running run.py within IDE terminal (Gitpod). The app was only deployed to Heroku once all gene name search and general functions were developed. The ensembl ID search functions were added after deployment, with initial function testing still carried out in IDE terminal. 
+Functions were tested as they were developed by running within IDE server (Gitpod). The site was first deployed to Heroku once the project and first app (article) had minimal wireup. Regular deployments, 4-5 times a day were carried out as features were developed. In this way all features were tested during development on the deployed site as well as IDE server to ensure features not impacted by deployment. If changes to any static files were updated or added 'collectstatic' command was used in terminal before testing features. 
 
-All functions, including validation steps were tested after each deployment. Testing steps were as follows:
-1. search selection
-    - test if correct gene name and ID selections work
-    - test if incorrect input of no input (''), word (mouse), letter (p) and wrong number (5) failed validation and gave correct value error message
+All functions, including prescence of any validation messages, were tested after each deployment.
 
-2. gene name search
-    - test if valid gene name (fus) produced correct gene expression output
-    - test if invalid gene (moby) produced the correct 'gene not found' response
-    - test if empty field produced correct error message
+Final testing was carried out on last deployment after all code validations was carried out. It was done by multiple individuals on multiple devices (phones and laptops of each tester).
 
-3. ensembl ID search
-    - test if valid ID (ENSMUSG00000032047) produced correct gene expression output
-    - test if ID validation worked correctly by identifying:
-        - no input ('')
-        - not an ID (fus)
-        - not 18 characters (ENSMUSG000000320)
-        - ENSMUSG start wrong (ENSMUPG00000032047)
-        - last 11 characters not numbers (ENSMUSG0000003204m)
-        - input begins with empty space before ID ( ENSMUSG00000032047)
+Core assessment criteria for all features were as follows:
+- That they work as expected
+- That you get a little feedback message at the top of the page if you successfully do something
+- That you get a pop-up to confirm action if you are doing something negative like logout or delete a comment.
+- That you get the expected visual changes to the site 
 
-4. search again/ exit
-    - test if valid input starts search again or produces thank you messsage on exit correctly
-    - test if incorrect input of no input (''), word (mouse), letter (p) and wrong number (5) failed validation and gave correct value error message
+The final testing steps were as follows:
+
+Before registering:
+1. Check basic page navagation and links for all pages work as expected. To check:
+   - Navbar (standard and mobile dropdown menu)
+   - Footer
+   - sign-up banners (home and about pages) take you to register page
+   - sign-in link to sign-up page
+   - sign-up link to sign-in page
+   - homepage article thumbnail to single article page - does correct article load?
+   - homepage pagination - do they work as expected and display correctly
+   - make general notes on usability and loading/responsivness of each page
+
+Registration and beyond:
+
+2. Account registration
+   - register an account - does this work and do you navigate to logged in state on homepage?
+   - logout - do you get confirmation request that you want to logout?
+   - is logout successful with a small 'you have logged out' message sent
+   - login - do you successfully log back in using new user credentials
+   - does the navbar update to reflect logged in/logged out status
+   - can you see your user-name displayed in navbar if logged in
+
+3. Contact Page contact form
+   - while logged out send a message that says 'this is a logged out message' - do you get a confirmation message of it being sent?
+   - while logged in send another message that says 'this is a logged in message' - do you get a confirmation message of it being sent?
+   - site admin checks and confirms both messages stored and can be marked as read
+
+4. Single article page likes
+When logged in:
+   - can the like button at bottom of article be seen?
+   - can the like button be clicked to register article as liked
+      - does the heart go dark to indicate like
+      - does the like counter increase by 1 to show registering of like
+      - do you get a confirmation of like being recieved?
+   - can you unlike a liked article?
+      - does the heart go empty to indicate no like
+      - does the like counter decrease by 1 to show removal of like
+      - do you get a confirmation of like being removed?
+When logged out:
+   - does the like button disappear?
+   - can you still see the same number of registered likes?
+
+5. Single article page comments
+When logged in:
+   - can the comment form at bottom of article be seen?
+   - can a new comment be submitted?
+      - does the comment appear in the comments list, marked as awaiting approval?
+      - do edit and delete buttons appear below the comment.
+      - do you get a confirmation of comment being submitted for approval?
+      - does the comment counter stay the same value (should only count approved comments)
+      - do comments from other users lack the edit and delete buttons?
+      - can you submit multiple comments on same article?
+   - can you edit a comment?
+      - does clicking on the edit button fill the comment form with the message to be edited?
+      - does the submitted edit change the displayed comment?
+      - do you get a confirmation of comment being edited?
+      - does the comment counter stay the same value (an edit should not count as new comment)
+   - can you delete a comment?
+      - does clicking on the delete button get a pop-up asking for confirmation of deletion?
+      - do you get confirmation of deletion if you delete?
+      - do you return to previous state with no changes if you cancel delete?
+      - does the deleted comment dissapear from comments thread?
+      - does the comment counter stay the same value if deleted comment was not yet approved?
+      - does comment counter decrease by 1 if deleted commented had been approved beforehand?
+When logged out:
+   - does the comment form disappear?
+   - do your own unapproved comments disapear (should only see approved comments)
+   - do edit and delete buttons disappear?
+   - can you still see the same number of comments on counter?
+   - on the gyokucho saw review article can you see the comment from kumiko_admin that says 'you should not see this comment as it is not approved'? (you shouldn't)
+
+6. Superuser Admin
+   - can you view and approve comments
+   - can you view and mark as read messages from contact page from both logged in and logged out users
+Articles:
+   - can you submit an article
+   - is the article immediately added to deployed site and displayed correctly?
+   - can you edit an article and do changes display on site after saving
+   - can you delete an article and does the article dissapear from site immediately
+   - does the default image display if no image file is provided?
+About:
+   - can you submit content for about us page
+   - is the content immediately added to deployed site and displayed correctly?
+   - can you edit about content and do changes display on site after saving
+   - can you delete about content (leads to empty page with no content on site)
+   - does the default image display if no image file is provided?
+Comment:
+   - can you submit content for contact page
+   - is the content immediately added to deployed site and displayed correctly?
+   - can you edit contact content and do changes display on site after saving
+   - can you delete contact content (leads to empty page with no content on site)
+   - does the default image display if no image file is provided?
 
 ## Devices and Browsers
 
 ### Web browsers
-Chrome (primary), Firefox , Edge and Brave
+Chrome (primary), Firefox , Edge 
 
 ### Devices
-- Phones: Pixel4a
-- Laptops: Dell Inspirion 13”, MacBook Air 13”
+- Phones: Pixel4a, iPhoneXR, GalaxyS10
+- Laptops: Dell Inspirion 13”, MacBookPro 13”, MacBook Air 13”, MacBook Pro 16" (new model), Microsoft Surface (v.old model)
 - Desktop screens: BenQ PD series 27”
 
 ## Testing Summary
-The app worked on all devices and browsers tested, with no issues with loading or novel error messages found.
+- During early testing phases, the interaction of classes from the Abstract template did cause functional bugs at times and required significant troubleshooting to identify.
+- The site worked on all devices and browsers tested, but issues were found on older devices. 
+- Two bugs were found which are reported in the Bugs section, these relate to like and comment submissions.
+- Recommendations for readability of login/register links in login/register forms was taken into account and changes make to improve.
+- Besides the bugs the biggest issue identified was the Django authorisation forms (register in particlular) which did not always perform as intended and submit details correctly. This issue was present on very old devices only and may have been a soft/hardware compatability issue.
 
-![testing-table](assets/static/testing-table.png)
+Testing summarised below - green = behaves as expected, orange = works but behaviour not as expected, red = does not work
 
-#### Not suitable for mobile phones
-While the app is functional on mobiles the following issues were apparent:
-- The mock terminal did not resize for smaller mobile screens and so:
-    - required sideways scrolling to read. 
-    - The terminal was partially covered by qwerty keyboard whenever user was required to input request, blocking the users view of what they were inputting
+![testing-table](static/images/testing-table.png)
 
-Conclusion: The mock terminal requires a redesign to enable effective use on mobiles and any device with touch screen that may become visually blocked when using qwerty keyboard.
+### Testing conclusion
+This site underperforms on older devices and browsers. The issues are primarily driven by Django third-party packages and not general page design. The masonary bricks are also laggy on old devices and an alternative may work better.
 
 ## Final Code Validation
-HTML – all pages passed validation with no errors detected using the official [W3C HTML validator](https://validator.w3.org/). The summary of results can be found [here](assets/readme/html-validation.png)
+HTML – all pages passed validation with no errors detected using the official [W3C HTML validator](https://validator.w3.org/). The summary of results can be found [here](static/images/html_validatons.pdf)
 
-CSS – all pages passed validation with no errors detected using the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/). The summary of results can be found [here](assets/readme/css-valdation.png)
+CSS – all pages passed validation with no errors detected using the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/). The summary of results can be found [here](static/images/css_validatons.pdf)
 
-JavaScript - 
+JavaScript - the game passed vaildation with no errors detected using [JS Hint](https://jshint.com/). The summary of results can be found [here](static/images/js_validatons.pdf)
 
-Accessibility – all pages showed high accessibility using Chrome [Lighthouse DevTools](https://developer.chrome.com/docs/lighthouse/). The summary of results can be found [here](assets/readme/Lighthouse-validation.png)
+Accessibility – all pages showed high accessibility using Chrome [Lighthouse DevTools](https://developer.chrome.com/docs/lighthouse/). The summary of results can be found [here](static/images/lighthouse.pdf). It should be noted that there was significant impact on 'best practises' for pages displaying images from older installed version of Cloudinary as it sends immages over HTTP, not HTTPS. Anupgrade to newer coloudinary version is part of future features.
 
 PYTHON - PEP8 validation: all .py files passed validation with no errors reported from [CI pep8 python linter](https://pep8ci.herokuapp.com/). This was carried out on all admin.py, apps.py, forms.py, models.py, tests.py, urls.py,views.py and the settings.py file.
 
 
 # Bugs
 ## Fixed
-- Gene_expression function print output occurs twice if user has selected to search again on deployed app. FIX: Cause unknown. Was present in first Heroku deployment and dissapeared after update. Logic for calling the function was changed anyway, to protect from similar bug occuring in future.
-- Validation of ensembl ID input not working. Does not detect change in length or incorrect format. FIX: Logic error - used ChatGPT to troubleshoot and adjust logic so that validation steps worked correctly.
-- App throws type error for search_selection(search_type) after introducing Genes as class and does not run past selecting search option. FIX: required inclusion of genes as input variable: search_selection(search_type, genes) in both function and when called in main.
-- No input for gene name search produces 'gene not found' message, not value error. FIX: created validate_name function to deal with empty field correctly.
+- Comment edit submitting new comment not changing old.
+Description:
+The submit process for edit not working and commentForm attribute not being assigned to allow submission of change. Is submitted as a new comment.
+Resolution:
+Found typo in submitButton single_article.html, but major issue was that the Abstract Id of contactForm was conflicting with the commentForm Id that needed to be identified to setAttribute of action="edit_comment" to change button action from submit to edit. The contactForm Id was removed to resolve.
+
+- Nav dropdown menu not working and hiding logo
+Description:
+Conflicting styling causing dropdown menu on small screens to not align properly and hide logo and close button
+Resolution:
+changed logo file to webp and smaller dimensions. Removed abstract classes from nav elements as causing clashing with styling and menu issues. Added custom css to style.css to override how abstract css deals with navbar images (logo).
+
+- Comment submission also submits like
+Description:
+When submitting a new comment the submission also submits a like.
+Resolution:
+Separated POST actions in views.py by ensuring comments actions only occurred when 'body' field included in submit, and like actions only when 'like' included.
+
+- Can see unapproved comments
+Description:
+Can view other users unapproved comments
+Resolution:
+Lacked the conditional classes in comment view area in single_article.html. The conditional statement was added, such that if unapproved and author - message faded, if unapproved and not author - message hidden
+
+- first article like does not register
+Description:
+First like does not register but does give a success message. Second and following attempts work fine.
+Resolution:
+First instance of user_like was not changing default value of False to True. This was resolved in single_article view by adding the statement 'like.like = True'
+
+#### Neutral resolution
+- Registration does not always show success message and reload back to home with logged in status. However, this seemed to be an issue on the oldest devices tested only and therefore marked as compatibility issue not as specific bug on site.
+- Cloudinary serving over HTTP, not HTTPS, which gives a console warning. This requires an upgrade of Cloudinary, specifically changing the couldinary storage plugin. The cloudinary storage used was the one from the CI blog walkthrough, which does not enable HTTPS as default. This was beyond the inital scope of the project and is marked as a future feature.
 
 ## Unfixed
-- No bugs remaining
+- comment does not clear from form after submission. This is a new error that was not present in previous deployments. Will need to check not accidental typo caused by edits from code validations (JShint and Pep8 linter). This bug does not occur when run from gitpod server, so could be an error during deployment. May resolve with new push to repo and redeployment.
+- first like is registered in model correctly but update of icon to solid heart on article page does not occur.
+
 
 # Deployment
 For deployment this project uses Heroku. The app was deployed to Heroku using the process described in the CI Django module coursework. 
@@ -232,7 +378,7 @@ In summary:
 3. The app was then deployed by connecting the corect GitHub repo (kumiko-community-hub) and selecting manual deployment option for the first deployment.
 4. The deployment setting was changed to automatic once the majority of functions had been written and tested.
 
-If you wish to develop this app further, feel free. To do this, create a fork of this repository and save it to your own github profile. To do this, use the fork button at the top right of this repository. This brings you to a new window, where you select yourself as the owner and can add extra details to name and description of the repo. You will then, if required, deploy to your own Heroku account using the process described above. You will also need to generate you own env.py and config var values to ensure all featuires will work. If you chose to do this, please be respectful and credit me as the origin of this project and code.
+If you wish to develop this app further, feel free. To do this, create a fork of this repository and save it to your own github profile. To do this, use the fork button at the top right of this repository. This brings you to a new window, where you select yourself as the owner and can add extra details to name and description of the repo. You will then, if required, deploy to your own Heroku account using the process described above. You will also need to generate you own env.py and Heroku config var values to ensure all featuires will work. If you chose to do this, please be respectful and credit me as the origin of this project and code.
 
 ![GitHub language count](https://img.shields.io/github/languages/count/Annytomica/kumiko-community-hub)
 ![GitHub top language](https://img.shields.io/github/languages/top/Annytomica/kumiko-community-hub?color=yellow)
@@ -243,7 +389,7 @@ If you wish to develop this app further, feel free. To do this, create a fork of
 # Credits
 I would like to acknowledge and thank the following people and resources used in the creation of this site.
 
-I would also like to note that this app was developed during a period where I was effectively homeless amd couch surfing with friends and family. I was deprived of reliable internet connections and ideal work spaces for significant periods of time. As such normal support routes of mentor meetings and tutoring, were not always available and ChatGPT was used as a replacement. While no code was directly generated by ChatGPT it does write out corrections for exisiting code, in a way that mentors and tutors do not, and I would like to acknowledge this fact.
+I would also like to note that this app was developed during a period where I was effectively homeless amd couch surfing with friends and family. I was deprived of reliable internet connections and ideal work spaces for significant periods of time. As such, normal support routes of mentor meetings and tutoring were not always available and ChatGPT was used as a replacement. While no code was directly generated by ChatGPT it does write out corrections for exisiting code, in a way that mentors and tutors do not, and I would like to acknowledge this fact.
 
 ## Content
 ### Large contributions
@@ -273,8 +419,11 @@ I would also like to note that this app was developed during a period where I wa
 
 
 ## Media
+- The photographs were taken by Megan Abel, my wife, who gave permission for thier use.
+-	The icons such as like hearts and comment bubble are from [Font Awesome](https://fontawesome.com/)
 - The Github summary bar used in README.md is from [shields.io](https://shields.io/badges/)
 
 ## Acknowledgements
-- My wife, Megan, for help with testing and general emotional support while I was trying to study and code while also moving country.
-- My Mentor My mentor, Oluwafemi Medale , for his invaluable guidance and feedback.
+- My wife, Megan, for help with the wireframe design, product photography, site testing and general emotional support while I was trying to study and code while also moving relentlessly.
+- My mum for excellent testing assistance
+- My mentor, Oluwafemi Medale , for his invaluable guidance and feedback and intital introduction to the concept of agile chores.
