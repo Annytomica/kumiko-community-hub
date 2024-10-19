@@ -25,17 +25,17 @@ def single_article(request, slug):
     ``post``
         An instance of :model:`article.Article`.
 
-    ``article_comment``
+    ``article_comments``
         All comments related to the article
 
     `` article_comment_count``
         A count of all approved comments to the article
 
-    ``article_likes``
-        All likes related to the article
-
     ``article_like_count``
         A count of all likes of the article
+    
+    ``user_like``
+        The like status of the present user
 
     **Template:**
 
@@ -52,14 +52,11 @@ def single_article(request, slug):
     article_likes_count = post.article_like.filter(like=True).count()
 
     # Check if user already liked post
-    user_like = None
+    # user_like = None
     if request.user.is_authenticated:
-        user_like = ArticleLike.objects.filter(author=request.user,
-                                               post=post).first()
+        user_like = ArticleLike.objects.filter(author=request.user, post=post).first()
+        print(user_like)                                      
 
-    # Initialize forms
-    article_comment_form = ArticleCommentForm()
-    article_like_form = ArticleLikeForm()
 
     if request.method == "POST":
         # comment form
@@ -80,6 +77,8 @@ def single_article(request, slug):
             article_like_form = ArticleLikeForm(data=request.POST)
             if article_like_form.is_valid():
                 if user_like:
+                    # If user already liked the article, toggle the like (unlike if liked)
+                    print('user_like recognised')
                     user_like.like = not user_like.like
                     user_like.save()
                     if user_like.like:
@@ -90,15 +89,22 @@ def single_article(request, slug):
                                              'You unliked this article.')
 
                 else:
+                    # If user has not liked yet, create a new like
+                    print('default else')
                     like = article_like_form.save(commit=False)
                     like.author = request.user
                     like.post = post
+                    like.like = True
                     like.save()
                     messages.add_message(request, messages.SUCCESS,
                                          'You liked this article.')
 
         # Recalculate like count after changes
         article_likes_count = post.article_like.filter(like=True).count()
+    
+    # Forms to pass to the template
+    article_comment_form = ArticleCommentForm()
+    article_like_form = ArticleLikeForm()
 
     return render(
         request,
