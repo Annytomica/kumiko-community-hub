@@ -52,7 +52,7 @@ def single_article(request, slug):
     article_likes_count = post.article_like.filter(like=True).count()
 
     # Check if user already liked post
-    # user_like = None
+    user_like = None
     if request.user.is_authenticated:
         user_like = ArticleLike.objects.filter(author=request.user, post=post).first()
         print(user_like)                                      
