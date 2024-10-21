@@ -330,34 +330,60 @@ PYTHON - PEP8 validation: all .py files passed validation with no errors reporte
 # Bugs
 ## Fixed
 - Comment edit submitting new comment not changing old.
-Description:
+
+**Description:**
 The submit process for edit not working and commentForm attribute not being assigned to allow submission of change. Is submitted as a new comment.
-Resolution:
+**Resolution:**
 Found typo in submitButton single_article.html, but major issue was that the Abstract Id of contactForm was conflicting with the commentForm Id that needed to be identified to setAttribute of action="edit_comment" to change button action from submit to edit. The contactForm Id was removed to resolve.
 
 - Nav dropdown menu not working and hiding logo
-Description:
+
+**Description:**
 Conflicting styling causing dropdown menu on small screens to not align properly and hide logo and close button
-Resolution:
+**Resolution:**
 changed logo file to webp and smaller dimensions. Removed abstract classes from nav elements as causing clashing with styling and menu issues. Added custom css to style.css to override how abstract css deals with navbar images (logo).
 
 - Comment submission also submits like
-Description:
+
+**Description:**
 When submitting a new comment the submission also submits a like.
-Resolution:
+**Resolution:**
 Separated POST actions in views.py by ensuring comments actions only occurred when 'body' field included in submit, and like actions only when 'like' included.
 
 - Can see unapproved comments
-Description:
+
+**Description:**
 Can view other users unapproved comments
-Resolution:
+**Resolution:**
 Lacked the conditional classes in comment view area in single_article.html. The conditional statement was added, such that if unapproved and author - message faded, if unapproved and not author - message hidden
 
 - First article like does not register
-Description:
+
+**Description:**
 First like does not register but does give a success message. Second and following attempts work fine.
-Resolution:
+**Resolution:**
 First instance of user_like was not changing default value of False to True. This was resolved in single_article view by adding the statement 'like.like = True'
+
+- Comment does not clear from form after submission
+
+**Description:**
+Article comment form does not clear after comment submitted and can be submitted again.
+**Resolution:**
+This was a bug introduced when fixing the bug associated with a like being submitted when a comment was submitted. It was caused by a change in logic for the view, where an empty form load was accidentally moved to before comment submission instead of after. The logic was reverted back to original order to fix the bug.
+
+- like icon does not update on first like
+
+**Description:**
+First like is registered in model correctly but update of icon to solid heart on article page does not occur.
+**Resolution:**
+After like submitted in views.py added an update to like status, at same point like counts also updated.
+
+- Single article page does not load if not logged in
+
+**Description:**
+When try to read single article without being logged in get UnboundLocalError: cannot access local variable 'user_like' where it is not associated with a value.
+**Resolution:**
+The initial statement 'user_like = None' had been commented out while troubleshooting other likes bugs. Comments removed so statement set default for all views as none.
 
 #### Neutral resolution
 - Registration does not always show success message and reload back to home with logged in status. However, this seemed to be an issue on the oldest devices tested only and therefore marked as compatibility issue not as specific bug on site.
@@ -365,8 +391,7 @@ First instance of user_like was not changing default value of False to True. Thi
 
 ## Unfixed
 
-- comment does not clear from form after submission. This is a new error that was not present in previous deployments. Will need to check not accidental typo caused by edits from code validations (JShint and Pep8 linter). This bug does not occur when run from gitpod server, so could be an error during deployment. May resolve with new push to repo and redeployment.
-- first like is registered in model correctly but update of icon to solid heart on article page does not occur.
+
 
 
 # Deployment
