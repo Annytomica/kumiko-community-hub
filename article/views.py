@@ -99,8 +99,10 @@ def single_article(request, slug):
                     messages.add_message(request, messages.SUCCESS,
                                          'You liked this article.')
 
-        # Recalculate like count after changes
+        # Update like button status and recalculate like count after submission
         article_likes_count = post.article_like.filter(like=True).count()
+        user_like = ArticleLike.objects.filter(author=request.user, post=post).first()
+    
     
     # Forms to pass to the template
     article_comment_form = ArticleCommentForm()
