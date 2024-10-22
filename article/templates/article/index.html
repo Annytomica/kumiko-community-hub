@@ -50,6 +50,12 @@
                     <div class="entry__excerpt">
                         <p>{{ article.excerpt }}</p>
                     </div>
+                    <div class="article__counts text-secondary">
+
+                            <i class="far fa-heart"></i> {{ article.article_likes_count }}
+                            <i class="far fa-comments"></i> {{ article.article_comment_count }}
+
+                    </div>
                 </div>
             </article>
             {% endfor %}

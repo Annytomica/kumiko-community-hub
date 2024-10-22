@@ -14,6 +14,16 @@ class ArticleList(generic.ListView):
     template_name = "article/index.html"
     paginate_by = 8
 
+    def get_context_data(self):
+            # Get the existing context
+            context = super().get_context_data()
+            
+            # Add like and comment counts for each article
+            for article in context['article_list']:
+                article.article_likes_count = article.article_like.filter(like=True).count()
+                article.article_comment_count = article.article_comments.filter(approved=True).count()
+
+            return context
 
 # Function-based view for a single article
 def single_article(request, slug):
