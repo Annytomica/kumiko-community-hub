@@ -385,9 +385,14 @@ When try to read single article without being logged in get UnboundLocalError: c
 **Resolution:**
 The initial statement 'user_like = None' had been commented out while troubleshooting other likes bugs. Comments removed so statement set default for all views as none.
 
+- Cloudinary serving over HTTP, not HTTPS.
+
+**Description:**  Cloudinary serves over HTTP, not HTTPS, indicating https default is being overridden. This gives a console warning and leads to low lighthouse score for best practises.
+**Resolution:** '?secure=true' was appended to end of CLOUDINARY_URL in env.py and Heroku config vars, which ensures all cloudinary urls are https.
+
 #### Neutral resolution
 - Registration does not always show success message and reload back to home with logged in status. However, this seemed to be an issue on the oldest devices tested only and therefore marked as compatibility issue not as specific bug on site.
-- Cloudinary serving over HTTP, not HTTPS, which gives a console warning. This requires an upgrade of Cloudinary, specifically changing the couldinary storage plugin. The cloudinary storage used was the one from the CI blog walkthrough, which does not enable HTTPS as default. This was beyond the inital scope of the project and is marked as a future feature.
+
 
 ## Unfixed
 
@@ -435,6 +440,8 @@ I would also like to note that this app was developed during a period where I wa
     - troubleshooting
     - optimising logic for like functions
     - correcting like/comments view to remove clash of submission (see bug report)
+    - displaying article like and comment counts on homepage
+    - fixing cloudinary http bug
 
 - [Top Coder](https://www.topcoder.com/thrive/articles/project-management-on-github) for tutorial on how to use GitHub projects for Agile project management
 
