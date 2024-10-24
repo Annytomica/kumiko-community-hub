@@ -106,12 +106,6 @@ Once community project submissions are enabled the homepage shows a selection of
 ### Conversation Threads
 The ability to respnd to a comment directly and start a discussion thread from that comment. Presently all comments are independent
 
-### Display of like and comment counts on gallery cards
-An ability to display the like and comment counts on the gallery cards would improve user experience and engagement, enticing users to indicate thier feelings and commments.
-
-### Update Django-cloudinary to newer version 
-To allow presentation of images via HTTPS, not HTTP. Use of HTTP gives a warning in the console and significantly reduces the Lighthouse score for best practises for all pages displaying a Cloudinary-stored image.
-
 ### Increase user navigation ability
 Present navigation back and forth on pages is limited. An ability to paginate through articles from the single article page would make a nice improvement to UX.
 
@@ -152,8 +146,25 @@ Contact:
 - contact: stores all information for presenting a single contact page
 - contact form: stores message from user for admin to view
 
+## Wireframes
+Wireframes for the project were developed in Balsamiq. The site consists of four templates - home, single article, about us and contact. The wireframes can be viewed as a pdf [here](static/images/wireframes.pdf)
 
-## Development process
+## Agile project management
+The project was managed using GitHub Agile tools - issues, project boards, labels and milestones.
+### Issues templates
+Custom issues templates were generated for Epics, User Stories, Chores, Tasks and Bugs.
+### Labels
+Custom labels for tagging issues were generated. They were grouped into two areas - issue type and issue importance.
+- Issue type: Epic, User Story, Chore, Task (Bug already exists in github as default)
+- Issue importance - Must have, should have, could have and won't have.
+### Milestones
+Milestones were created for key deadlines (eg. MVP submission deadline) and iterations.
+
+## Development Process
+
+The deveplopment of the project was systematically developed using the following workflow.
+
+### Technical Development
 The app development, for each app included in the project, followed the steps outlined below:
 1. create app in kumiko Django project
 2. Do mminimum wireup of settings.py, views.py and urls.py and creating html template as defined in SI coursework
@@ -169,17 +180,20 @@ The app development, for each app included in the project, followed the steps ou
 - Django - all app functions
 - Bootstrap
 - HTML/CSS/JS
-- Cloudinary
+- Cloudinary + dj3-cloudinary-storage - for image storage and management
 - Django-crispy-forms
 - gunicorn - for Heroku deployment of Django project
 - Django-allauth - for user validation
 - Django-summernote - for auto text area formatting assistance
 - whitenoise
 - Figma – flowchart development
+- Balsamiq - wireframe generation
 - Photoshop - image processing
 - ChatGPT - troubleshooting, typo finding and logic problems
 - Heroku - app deployment and hosting
 - google docs, sheets and slides
+- Pixelied.com – conversion of jpeg and png image files to webp for efficient loading
+- Favicon.io – generation of favicon from logo design.
 - UI.dev – amiresponsive was used to create site mockup images.
 
 # Testing
