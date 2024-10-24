@@ -109,7 +109,10 @@ The ability to respnd to a comment directly and start a discussion thread from t
 ### Increase user navigation ability
 Present navigation back and forth on pages is limited. An ability to paginate through articles from the single article page would make a nice improvement to UX.
 
-# App design process
+# Project Design and Implementation
+## Development Process
+
+The project was systematically developed using the following workflow. Principles of **Design Thinking** were implemented to create the project outline, identify the target audience and set clear goals for the project. The project structure and **data models** were then defined, with an ERD generated to show model interactions. **Wireframes** were developed for the project, to define the UI and UX and each page tempaltes structure. **Agile** methods of porject management were then implemented, including defining core Epics, user stories, chores and tasks, by taking advantage of **GitHub Agile tools**. Once this was completed the core **technical development** of the Django project was started, systematically building one app at a time until project complete. **Testing** was carried out as new features and app were developed, with a final comprehensive testing period comeplted at the end by multiple testers using a multitude of devices. **Code validations** were then carried out along with the final update to the **README.md** before submission of the project for external assessment.
 
 ## Rationale
 A full site project outline can be viewed [here](https://docs.google.com/document/d/1W2LfAeY3Gkv_EZSodBBBzSgNinVPhwcOKg3yjh0x3Fs/edit?usp=sharing)
@@ -177,15 +180,14 @@ Initial issues to fulfil the basic goals of the project, consisting of Epics, Us
 
 Issues were transfered to the relevant project boards as and when required, using the issues templates created at the start of the project. This ensured the backlog columns were not overloaded and issues were easily identified and transfered to ready column when required.
 
+#### Issues Summary:
+In total **128** issues were generated for the project, consisting of 9 Epics, 19 User Stories, 38 Chores, 54 Tasks and 8 Bugs.
+
 ### Iterations
 Iterations, defined using Github milestones, standardly ran with a timebox of 2 days unless a known 'no work' day was within that timeframe. MoSCoW labels were applied to issues as they were assigned to an iteration, with the rule that no more than 60% could be defined as 'must have' per iteration.
 
-## Development Process
-
-The project was systematically developed using the following workflow.
-
-### Technical Development
-The app development, for each app included in the project, followed the steps outlined below:
+## Technical Development
+The app development process, for each app included in the project, followed the steps outlined below:
 1. create app in kumiko Django project
 2. Do minimum wireup of settings.py, views.py and urls.py and creating html template as defined in SI coursework
 3. Set up models and link to views and urls
