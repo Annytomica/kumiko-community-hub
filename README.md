@@ -159,15 +159,35 @@ Custom labels for tagging issues were generated. They were grouped into two area
 - Issue importance - Must have, should have, could have and won't have.
 ### Milestones
 Milestones were created for key deadlines (eg. MVP submission deadline) and iterations.
+### Github projects
+Two projects were set up - KCH Scrum Board and KCH Task Board. 
+- **KCH Scrum Board:** This project consists of a Scrum Board and a Roadmap and can be found [here](https://github.com/users/Annytomica/projects/8/views/2). The Scrum board has 6 columns:
+   - No status - for epics only as these were not assigned milestones.
+   - Backlog: For all user stories, chores and bugs awaiting assigment to an iteration
+   - Ready: User stories, chores and bugs assigned to iteration but not yet started.
+   - In progress: User stories, chores and bugs actively being worked on.
+   - In review: User stories, chores and bugs completed but not yet fully tested for functionality.
+   - Done: Epics, User stories, Chores and Bugs that are completed.
+
+   The Roadmap was used to track the issues timelines and completions. It was also used to track workload for an iteration and ensure it was not overly optimistic for number of issues to complete.
+- **KCH Task Board:** This project consists of a single task board and can be found [here](https://github.com/users/Annytomica/projects/9/views/1). This board was used to track tasks only, with the tasks assigned to specific user stories or chores. It replicates the column format on the scrum board, except lacks the no status column due to no epics being included on this board.
+
+### Issues
+Initial issues to fulfil the basic goals of the project, consisting of Epics, User Stories, Chores and Tasks, were defined before any technical development of the project began. They were outlined in a google sheet that can be found [here](https://docs.google.com/spreadsheets/d/108McokctYqyY1FebOTyf3hxA48sUfmqkOYjqKMCINfU/edit?usp=sharing). Additional issues were added to the sheet as the project progressed. 
+
+Issues were transfered to the relevant project boards as and when required, using the issues templates created at the start of the project. This ensured the backlog columns were not overloaded and issues were easily identified and transfered to ready column when required.
+
+### Iterations
+Iterations, defined using Github milestones, standardly ran with a timebox of 2 days unless a known 'no work' day was within that timeframe. MoSCoW labels were applied to issues as they were assigned to an iteration, with the rule that no more than 60% could be defined as 'must have' per iteration.
 
 ## Development Process
 
-The deveplopment of the project was systematically developed using the following workflow.
+The project was systematically developed using the following workflow.
 
 ### Technical Development
 The app development, for each app included in the project, followed the steps outlined below:
 1. create app in kumiko Django project
-2. Do mminimum wireup of settings.py, views.py and urls.py and creating html template as defined in SI coursework
+2. Do minimum wireup of settings.py, views.py and urls.py and creating html template as defined in SI coursework
 3. Set up models and link to views and urls
 4. test model in admin panel
 5. Create appropriate views in views.py to display information stored in database model. One view taken through dev steps 5-9 at one time and then process repeated for next.
@@ -181,11 +201,11 @@ The app development, for each app included in the project, followed the steps ou
 - Bootstrap
 - HTML/CSS/JS
 - Cloudinary + dj3-cloudinary-storage - for image storage and management
-- Django-crispy-forms
+- Django-crispy-forms - for assistance with form content and processing
 - gunicorn - for Heroku deployment of Django project
 - Django-allauth - for user validation
 - Django-summernote - for auto text area formatting assistance
-- whitenoise
+- WhiteNoise - to assist serving of static files on Heroku
 - Figma – flowchart development
 - Balsamiq - wireframe generation
 - Photoshop - image processing
