@@ -13,6 +13,15 @@ class ArticleAdmin(SummernoteModelAdmin):
     summernote_fields = ()
 
 
-# Register your models here.
-admin.site.register(ArticleComment)
-admin.site.register(ArticleLike)
+@admin.register(ArticleComment)
+class ArticleCommentAdmin(SummernoteModelAdmin):
+
+    list_display = ('post', 'approved', 'created_on')
+    list_filter = ('approved', 'created_on', 'author', 'post', )
+
+
+@admin.register(ArticleLike)
+class ArticleLikeAdmin(SummernoteModelAdmin):
+
+    list_display = ('post', 'like', 'created_on')
+    list_filter = ('like', 'created_on', 'author', 'post', )
