@@ -7,6 +7,10 @@ const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
 const deleteButtons = document.getElementsByClassName("btn-delete");
 const deleteConfirm = document.getElementById("deleteConfirm");
 
+/** The following js functions - including annotations - were taken from the
+ * Code Institute Blog walkthrough project with only minor modifications to suit
+ * this present project **/
+
 /**
 * Initializes edit functionality for the provided edit buttons.
 * 

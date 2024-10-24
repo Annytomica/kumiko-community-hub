@@ -3,6 +3,7 @@ from django_summernote.admin import SummernoteModelAdmin
 from .models import Article, ArticleComment, ArticleLike
 
 
+# registers summernote settings for Article in admin
 @admin.register(Article)
 class ArticleAdmin(SummernoteModelAdmin):
 
@@ -13,6 +14,7 @@ class ArticleAdmin(SummernoteModelAdmin):
     summernote_fields = ()
 
 
+# registers summernote settings for Article Comments in admin
 @admin.register(ArticleComment)
 class ArticleCommentAdmin(SummernoteModelAdmin):
 
@@ -20,6 +22,7 @@ class ArticleCommentAdmin(SummernoteModelAdmin):
     list_filter = ('approved', 'created_on', 'author', 'post', )
 
 
+# registers summernote settings for Article Likes in admin
 @admin.register(ArticleLike)
 class ArticleLikeAdmin(SummernoteModelAdmin):
 
