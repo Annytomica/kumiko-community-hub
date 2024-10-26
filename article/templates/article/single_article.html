@@ -106,12 +106,12 @@
 
         <!-- User Navigation to other articles -->
         <div class="row">
-                <!-- Previous Article Button -->
+                <!-- Next Article Button -->
                 <div class="large-4 mob-12 column">
-                    {% if prev_article %}
-                    <a href="{% url 'single_article' prev_article.slug %}" >
-                        <h6>&larr; PREVIOUS </h6>
-                        <p>{{ prev_article.title }}</p>
+                    {% if next_article %}
+                    <a href="{% url 'single_article' next_article.slug %}">
+                        <h6> &larr; NEXT </h6> 
+                        <p>{{ next_article.title }}</p>
                     </a>
                     {% endif %}
                 </div>
@@ -123,12 +123,12 @@
                     </a>
                 </div>
             
-                <!-- Next Article Button -->
+                <!-- Previous Article Button -->
                 <div class="large-4 mob-12 column text-end">
-                    {% if next_article %}
-                    <a href="{% url 'single_article' next_article.slug %}">
-                        <h6>NEXT &rarr;</h6> 
-                        <p>{{ next_article.title }}</p>
+                    {% if prev_article %}
+                    <a href="{% url 'single_article' prev_article.slug %}" >
+                        <h6>PREVIOUS &rarr;</h6>
+                        <p>{{ prev_article.title }}</p>
                     </a>
                     {% endif %}
                 </div>
