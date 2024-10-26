@@ -5,14 +5,23 @@
 
 
     <section class="s-content s-content--single">
-        <!-- Displaying count of likes and comments -->
+
         <div class="row">
-            <div class="column large-12">
-                <p class="text-secondary text-end">
+            <!-- Back to Articles Home Button -->
+            <div class="large-4 mob-12 column">
+                <a href="{% url 'home' %}">
+                    <h6 class="text-secondary"> &larr; Back to Articles </h6>
+                </a>
+            </div>
+            <div class="large-4 mob-12 column"></div>
+            <!-- Displaying count of likes and comments -->
+            <div class="large-4 mob-12 column">
+                <h6 class="text-secondary text-end">
                     <i class="far fa-heart"></i> {{ article_likes_count }}
                     <i class="far fa-comments"></i> {{ article_comment_count }}
-                </p>
+                </h6>
             </div>
+
         </div>
         <!-- main article content -->
         <div class="row">
@@ -80,6 +89,7 @@
         </div>
         {% endif %}
 
+        <!-- User Navigation to other articles -->
         <div class="row">
                 <!-- Previous Article Button -->
                 <div class="large-4 mob-12 column">
@@ -99,7 +109,7 @@
                 </div>
             
                 <!-- Next Article Button -->
-                <div class="large-4 mob-12 column">
+                <div class="large-4 mob-12 column text-end">
                     {% if next_article %}
                     <a href="{% url 'single_article' next_article.slug %}">
                         <h6>NEXT &rarr;</h6> 
