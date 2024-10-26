@@ -4,6 +4,11 @@
     font-size: x-large;
 }
 
+/** Navbar **/
+.kch_brand {
+    margin-left: 0 !important;
+}
+
 /**  Home page **/
 /**  Hero banner **/
 .container-fluid.hero {
