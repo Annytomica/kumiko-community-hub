@@ -5,8 +5,8 @@
 
 
     <section class="s-content s-content--single">
-
-        <div class="row">
+        <!-- back button and counts for large screens -->
+        <div class="row d-none d-lg-flex">
             <!-- Back to Articles Home Button -->
             <div class="large-4 mob-12 column">
                 <a href="{% url 'home' %}">
@@ -21,7 +21,22 @@
                     <i class="far fa-comments"></i> {{ article_comment_count }}
                 </h6>
             </div>
-
+        </div>
+        <!-- back button and counts for small screens -->
+        <div class="row d-lg-none">
+            <!-- Back to Articles Home Button -->
+            <div class="col">
+                <a href="{% url 'home' %}">
+                    <h6 class="text-secondary"> &larr; Back</h6>
+                </a>
+            </div>
+            <!-- Displaying count of likes and comments -->
+            <div class="col">
+                <h6 class="text-secondary text-end">
+                    <i class="far fa-heart"></i> {{ article_likes_count }}
+                    <i class="far fa-comments"></i> {{ article_comment_count }}
+                </h6>
+            </div>
         </div>
         <!-- main article content -->
         <div class="row">
@@ -102,7 +117,7 @@
                 </div>
             
                 <!-- Back to Home Button -->
-                <div class="large-4 mob-12 column">
+                <div class="large-4 mob-12 column text-center">
                     <a href="{% url 'home' %}" class="btn btn--stroke">
                         Back to Articles
                     </a>
