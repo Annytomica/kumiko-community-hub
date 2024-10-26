@@ -46,6 +46,12 @@ def single_article(request, slug):
     
     ``user_like``
         The like status of the present user
+    
+    ``next_article``
+        An instance of the next article, according to created_on date order
+
+    ``prev_article``
+        An instance of the previous article, according to created_on date order
 
     **Template:**
 
@@ -118,6 +124,12 @@ def single_article(request, slug):
     article_comment_form = ArticleCommentForm()
     article_like_form = ArticleLikeForm()
 
+
+    # Get next and previous articles
+    next_article = Article.objects.filter(status=1, created_on__gt=post.created_on).order_by('created_on').first()
+    prev_article = Article.objects.filter(status=1, created_on__lt=post.created_on).order_by('-created_on').first()
+
+
     return render(
         request,
         "article/single_article.html",
@@ -128,6 +140,8 @@ def single_article(request, slug):
          "article_likes_count": article_likes_count,
          "article_like_form": article_like_form,
          "user_like": user_like,
+         "next_article": next_article,
+         "prev_article": prev_article,
          },
     )
 

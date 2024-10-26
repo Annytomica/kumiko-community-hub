@@ -30,7 +30,7 @@ def contact_me(request):
                 "Message sent! Thank You!")
 
     """
-    Renders the About page
+    Renders the Contact page
     """
     contact = Contact.objects.all().order_by('-updated_on').first()
 
