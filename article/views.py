@@ -6,55 +6,91 @@ from .models import Article, ArticleComment, ArticleLike
 from .forms import ArticleCommentForm, ArticleLikeForm
 
 
-# Create your views here.
-
 # Class-based view for article list
 class ArticleList(generic.ListView):
+    """
+    View to display a list of published articles with pagination.
+    
+    **Models**
+    Uses :model:`article.Article` to retrieve and display a list of articles.
+
+    **Context**
+    ``article_list``
+        A queryset of :model:`article.Article`
+        ordered by the most recent creation date
+        filtered to only include published articles (status=1).
+    ``article.article_likes_count``
+        A count of all likes associated with each article in the queryset.
+        Calculated dynamically for each article.
+    ``article.article_comment_count``
+        A count of all approved comments associated with each article in the queryset.
+        Calculated dynamically for each article.
+
+    **Additional Behavior:**
+    Uses pagination to limit the number of articles displayed per page.
+    The number of articles displayed per page is set to 8.
+
+    **Template:**
+    :template:`article/index.html`
+    """
     queryset = Article.objects.filter(status=1).order_by("-created_on")
     template_name = "article/index.html"
     paginate_by = 8
 
     def get_context_data(self):
-            # Get the existing context
-            context = super().get_context_data()
+        """
+        Add like and comment counts for each article to the context.
+        """
+        # Get the existing context
+        context = super().get_context_data()
             
-            # Add like and comment counts for each article
-            for article in context['article_list']:
-                article.article_likes_count = article.article_like.filter(like=True).count()
-                article.article_comment_count = article.article_comments.filter(approved=True).count()
+        # Add like and comment counts for each article
+        for article in context['article_list']:
+            article.article_likes_count = article.article_like.filter(like=True).count()
+            article.article_comment_count = article.article_comments.filter(approved=True).count()
 
-            return context
+        return context
+
 
 # Function-based view for a single article
 def single_article(request, slug):
     """
+    View to display a single article with all features including:
+    - single article content
+    - like button and like count
+    - comments, comment form and comment count
+    - next and previous articles navigation
+
+    ** Models **
     Display an individual :model:`article.Article`.
+    Interact with :model:`article.ArticleComment` for comment handling.
+    Interact with :model:`article.ArticleLike` for like/unlike functionality.
 
     **Context**
-
     ``post``
         An instance of :model:`article.Article`.
-
     ``article_comments``
-        All comments related to the article
-
+        All comments related to the article, ordered by creation date.
     `` article_comment_count``
-        A count of all approved comments to the article
-
+        A count of all approved comments related to the article
+    `` article_comment_form``
+        An instance of :form:`ArticleCommentForm` used to submit new comments
     ``article_like_count``
         A count of all likes of the article
-    
     ``user_like``
-        The like status of the present user
-    
+        An instance of :model:`article.ArticleLike` 
+        if the present user has liked the article, otherwise `None`.
+    `` article_like_form``
+        An instance of :form:`article_like_form` 
+        toggles likes via hidden input
     ``next_article``
-        An instance of the next article, according to created_on date order
-
+        An instance of the next :model:`article.Article`
+        according to created_on date order or `None` if no next article exists.
     ``prev_article``
-        An instance of the previous article, according to created_on date order
+        An instance of the previous :model:`article.Article`
+        according to created_on date order or `None` if no previous article exists.
 
     **Template:**
-
     :template:`article/single_article.html`
     """
 
@@ -142,10 +178,36 @@ def single_article(request, slug):
          },
     )
 
-
+# This view was taken from CI blog walkthrough with only minor alteration
 def article_comment_edit(request, slug, comment_id):
     """
-    view to edit article comments
+    View to allow user to edit their own comment on an article.
+    Displays an individual comment for edit in comment form.
+    A user must be logged in for this view to be present.
+
+    **Models**
+    
+    Uses :model:`article.Article` to retrieve the article associated with the comment.
+    Uses :model:`article.ArticleComment` to retrieve and update the comment.
+    
+    **Context**
+    ``post``
+        An instance of :model:`article.Article`
+    ``comment``
+        A single comment related to the post
+    ``comment_form``
+        An instance of :form:`article.ArticleCommentForm`
+
+    **Parameters**
+    ``slug``
+        A string value used to identify and fetch the relevant article.
+    ``comment_id``
+        An integer ID used to locate the specific comment to be edited.
+    
+    **Template:**
+    :template:`article/single_article.html`
+    Redirects back to single_article.html (single article view) after processing
+
     """
     if request.method == "POST":
 
@@ -167,9 +229,31 @@ def article_comment_edit(request, slug, comment_id):
     return HttpResponseRedirect(reverse('single_article', args=[slug]))
 
 
+# This view was taken from CI blog walkthrough with only minor alteration
 def article_comment_delete(request, slug, comment_id):
     """
-    view to delete article comments
+    View to allow user to delete their own comment on an article.
+    A user must be logged in for this view to be present.
+
+    **Models**
+    Uses :model:`article.Article` to retrieve the article associated with the comment.
+    Uses :model:`article.ArticleComment` to locate and delete the comment.
+
+    **Context**
+    ``post``
+        An instance of :model:`article.Article`
+    ``comment``
+        A single comment related to the post
+    
+    **Parameters**
+    ``slug``
+        A string value used to identify and fetch the relevant article.
+    ``comment_id``
+        An integer ID used to locate the specific comment to be edited.
+    
+    **Template:**
+    :template:`article/single_article.html`
+    Redirects back to single_article.html (single article view) after processing
     """
     queryset = Article.objects.filter(status=1)
     post = get_object_or_404(queryset, slug=slug)
