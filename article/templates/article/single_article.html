@@ -188,7 +188,7 @@
                             type="submit">Add comment</button>
                     </form>
                     {% else %}
-                    <p>Log in to leave a comment</p>
+                    <p><a href="{% url 'account_signup' %}"><b>Sign up</b></a> or <a href="{% url 'account_login' %}"><b>Log in</b></a> to leave a comment</p>
                     {% endif %}
                 </div>
             </div>
