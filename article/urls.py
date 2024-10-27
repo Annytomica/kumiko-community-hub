@@ -1,12 +1,16 @@
-from . import views
 from django.urls import path
+from . import views
 
 
 urlpatterns = [
-    path('', views.ArticleList.as_view(), name='home'),
-    path('<slug:slug>/', views.single_article, name='single_article'),
-    path('<slug:slug>/edit_comment/<int:comment_id>',
+     # URL pattern for the article list page - which is home page
+     path('', views.ArticleList.as_view(), name='home'),
+     # URL pattern for viewing a single article - identified by its slug
+     path('<slug:slug>/', views.single_article, name='single_article'),
+     # URL pattern for editing a specific comment by its ID on a single article page
+     path('<slug:slug>/edit_comment/<int:comment_id>',
          views.article_comment_edit, name='article_comment_edit'),
-    path('<slug:slug>/delete_comment/<int:comment_id>',
+     # URL pattern for deleting a specific comment by its ID on a single article page
+     path('<slug:slug>/delete_comment/<int:comment_id>',
          views.article_comment_delete, name='article_comment_delete'),
 ]
