@@ -4,11 +4,16 @@ from .models import Contact
 from .forms import ContactMessage
 
 
-# Create your views here.
+# Function-based view for a single contact page
+# this view was modified from CI blog walkthrough about/about_me view
 def contact_me(request):
     """
-    Renders the most recent information about the website
-    and allows user feedback
+    View to display content for a single contact page
+    Displays the most recent entry in database
+    Allows user feedback via contact form 
+    Feedback form is open and does not require user registration
+
+    ** Models **
     Displays an individual instance of :model:`contact.Contact`.
 
     **Context**
@@ -29,11 +34,10 @@ def contact_me(request):
                 request, messages.SUCCESS,
                 "Message sent! Thank You!")
 
-    """
-    Renders the Contact page
-    """
+    # Renders the Contact page
     contact = Contact.objects.all().order_by('-updated_on').first()
 
+    # Contact Form to pass to the template
     contact_message = ContactMessage()
 
     return render(

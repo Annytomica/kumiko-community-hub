@@ -4,7 +4,9 @@ from cloudinary.models import CloudinaryField
 
 class Contact(models.Model):
     """
-    Stores single about me content
+    Stores single Contact content entry
+    This model has no foreign key 
+    Entries can only be submitted by superuser via /admin
     """
     opening = models.CharField(max_length=200)
     body = models.TextField()
@@ -18,6 +20,9 @@ class Contact(models.Model):
 class ContactMessage(models.Model):
     """
     Stores a single contact request message
+    This model has no foreign key 
+    Entries can be submitted by any site user - no registration required
+    Stored messages are only viewable by site admin via /admin
     """
     name = models.CharField(max_length=200)
     email = models.EmailField()
