@@ -6,11 +6,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const likeCheckbox = document.querySelector("input[name='like']");
     const likeForm = document.getElementById("likeForm");
 
-    /** Initialises article like/unlike functionality:
-     * - retrieves like button status for user for the present article
-     * - toggles the status upon user click
-     * - changes button appearance to reflect new like status
-     * - submits status change to likeForm for update of ArticleLike model
+    /**
+     * Sets up the like/unlike functionality for the article.
+     * 
+     * Attaches a click event listener to the `likeButton`, enabling the following behavior:
+     * - Checks the current like status for the user on the specific article.
+     * - Toggles the like state whenever the button is clicked.
+     * - Updates the button's appearance to reflect the new like or unlike status.
+     * - Submits the updated like state via the `likeForm` to update the `ArticleLike` model.
      */
 
     likeButton.addEventListener("click", function() {
