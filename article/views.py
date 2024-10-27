@@ -70,8 +70,7 @@ def single_article(request, slug):
     # Check if user already liked post
     user_like = None
     if request.user.is_authenticated:
-        user_like = ArticleLike.objects.filter(author=request.user, post=post).first()
-        print(user_like)                                      
+        user_like = ArticleLike.objects.filter(author=request.user, post=post).first()                                   
 
 
     if request.method == "POST":
@@ -94,7 +93,6 @@ def single_article(request, slug):
             if article_like_form.is_valid():
                 if user_like:
                     # If user already liked the article, toggle the like (unlike if liked)
-                    print('user_like recognised')
                     user_like.like = not user_like.like
                     user_like.save()
                     if user_like.like:
@@ -106,7 +104,6 @@ def single_article(request, slug):
 
                 else:
                     # If user has not liked yet, create a new like
-                    print('default else')
                     like = article_like_form.save(commit=False)
                     like.author = request.user
                     like.post = post
