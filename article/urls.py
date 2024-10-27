@@ -7,10 +7,10 @@ urlpatterns = [
      path('', views.ArticleList.as_view(), name='home'),
      # URL pattern for viewing a single article - identified by its slug
      path('<slug:slug>/', views.single_article, name='single_article'),
-     # URL pattern for editing a specific comment by its ID on a single article page
+     # URL pattern for editing a comment by its ID on single article page
      path('<slug:slug>/edit_comment/<int:comment_id>',
-         views.article_comment_edit, name='article_comment_edit'),
-     # URL pattern for deleting a specific comment by its ID on a single article page
+          views.article_comment_edit, name='article_comment_edit'),
+     # URL pattern for deleting a comment by its ID on single article page
      path('<slug:slug>/delete_comment/<int:comment_id>',
-         views.article_comment_delete, name='article_comment_delete'),
+          views.article_comment_delete, name='article_comment_delete'),
 ]

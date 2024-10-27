@@ -10,7 +10,7 @@ def contact_me(request):
     """
     View to display content for a single contact page
     Displays the most recent entry in database
-    Allows user feedback via contact form 
+    Allows user feedback via contact form
     Feedback form is open and does not require user registration
 
     ** Models **

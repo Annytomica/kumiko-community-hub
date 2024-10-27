@@ -8,7 +8,7 @@ def about_me(request):
     """
     View to display content for a single about us page
     Displays the most recent entry in database
- 
+
     ** Models **
     Display an individual instance of :model:`about.About`.
 
