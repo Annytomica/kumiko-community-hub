@@ -2,7 +2,19 @@ from django.test import TestCase
 from .forms import ArticleCommentForm, ArticleLikeForm
 
 
-# Tests for Article comment form
+"""
+Tests for article comment form.
+
+The tests check for:
+- form vaild when comment entered correctly
+- form invalid if 'body' is left empty
+- form invalid if 'body' is whitespace only
+- form widgets work as expected:
+    - placeholders are correct
+NB: ChatGPT was used to help design tests for widgets
+"""
+
+
 class TestArticleCommentForm(TestCase):
 
     def test_form_is_valid_if_message(self):
@@ -36,7 +48,19 @@ class TestArticleCommentForm(TestCase):
         )
 
 
-# Tests for Article Likes form - Like is a Boolean Field
+"""
+Tests for article likes form
+
+** Like is a Boolean Field **
+
+The tests check for:
+- form valid when 'like' is true
+- form valid when 'like' is false
+- form valid when  inital 'like' default is None
+
+"""
+
+
 class TestArticleLikeForm(TestCase):
 
     def test_like_form_is_valid_with_true(self):
