@@ -13,7 +13,9 @@ The live website can be accessed [here](https://kumiko-b16d8bc28246.herokuapp.co
 
 ## Existing features
 ### Abstract template from StyleShout
-The site layout is adapted from the free bootstrap template from [StyleShout](https://styleshout.com/abstract-modern-masonry-blog-website-template/) called Abstract. It has a very clean, minimal style and a great gallery display design.
+The site layout is adapted from the free bootstrap template from [StyleShout](https://styleshout.com/abstract-modern-masonry-blog-website-template/) called Abstract. It has a very clean, minimal style and a great gallery display design. It was chosen due to it's stylish implementation of 'masonry' tiling motion of gallery cards.
+Custom html and CSS was built on top of this template to suit the project goals.
+Usage of this template did not come without issues and in particular Abstract forms classes interfered with django forms and crispy-forms behaviours.
 
 ### Hero banner
 The hero photography is if Kumiko projects carried out by Anny Devoy, with the photograpgy by Megan Abel. It has a very simple message about the core principles of the community and invites people to join. The hero is a picture element, with differnt images to make efficiently responsive to screen size.
@@ -70,6 +72,9 @@ Approved comments are displayed below the article. If the user is logged in and 
 When logged in the like/unlike toggle button becomes visible. It toggles between outline (user has not liked article) and solid (user likes article). When solid it also add an increment of 1 to the likes counter.
 
 ![likes](static/images/likes.png)
+
+#### Next and Previous articles
+To improve UX, below the like button is a navigation section that displays links - with article titles - to the next and previous articles and button to return to the homepage with all articles.
 
 #### Comment form
 When logged in the comment form is displayed and the user can submit a comment. If the user wants to edit a comment the comment is displayed in the form to change and resubmit.
