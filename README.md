@@ -63,10 +63,6 @@ The page provides a stylised visual presentation of all Article model field entr
 
 #### Likes and comments counts
 Number of likes and approved comments are displayed at top of article, just above the article image.
-#### Approved comments
-Approved comments are displayed below the article. If the user is logged in and has a comment awaiting approval this will also appear in comments list. All comments made by the logged in user will also now display edit and delete buttons below to enable full CRUD functionality.
-
-![comments](static/images/comments.png)
 
 #### Like button
 When logged in the like/unlike toggle button becomes visible. It toggles between outline (user has not liked article) and solid (user likes article). When solid it also add an increment of 1 to the likes counter.
@@ -75,6 +71,12 @@ When logged in the like/unlike toggle button becomes visible. It toggles between
 
 #### Next and Previous articles
 To improve UX, below the like button is a navigation section that displays links - with article titles - to the next and previous articles and button to return to the homepage with all articles.
+
+#### Approved comments
+Approved comments are displayed below the article. If the user is logged in and has a comment awaiting approval this will also appear in comments list. All comments made by the logged in user will also now display edit and delete buttons below to enable full CRUD functionality.
+
+![comments](static/images/comments.png)
+
 
 #### Comment form
 When logged in the comment form is displayed and the user can submit a comment. If the user wants to edit a comment the comment is displayed in the form to change and resubmit.
