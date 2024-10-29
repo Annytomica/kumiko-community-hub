@@ -42,28 +42,28 @@ class TestArticleListView(TestCase):
         # create list of published mock articles
         for i in range(12):
             Article.objects.create(
-                title = f"Test Article {i}",
-                slug = f"Test-Article-{i}",
-                author = self.user,
-                content = "Test content",
-                excerpt = "Test excerpt",
-                pull_quote = f"Test quote {i}",
-                primary_image = "test_image.jpeg",
-                tags = 1,
-                status = 1,
+                title=f"Test Article {i}",
+                slug=f"Test-Article-{i}",
+                author=self.user,
+                content="Test content",
+                excerpt="Test excerpt",
+                pull_quote=f"Test quote {i}",
+                primary_image="test_image.jpeg",
+                tags=1,
+                status=1,
             )
 
         # create instance of unpublished article
         Article.objects.create(
-            title = "Unpublished Test Article",
-            slug = "Unpublished-Test-Article",
-            author = self.user,
-            content = "Test content",
-            excerpt = "Test excerpt",
-            pull_quote = "Unpublished Test Quote",
-            primary_image = "test_image.jpeg",
-            tags = 1,
-            status = 0,
+            title="Unpublished Test Article",
+            slug="Unpublished-Test-Article",
+            author=self.user,
+            content="Test content",
+            excerpt="Test excerpt",
+            pull_quote="Unpublished Test Quote",
+            primary_image="test_image.jpeg",
+            tags=1,
+            status=0,
             )
 
     # test that ArticleList view renders correctly
@@ -146,50 +146,50 @@ class TestSingleArticleView(TestCase):
 
         # create instance of published article
         self.article = Article(
-            title = "Test Article",
-            slug = "Test-Article",
-            author = self.user,
-            content = "Test content",
-            excerpt = "Test excerpt",
-            pull_quote = "Test Quote",
-            primary_image = "test_image.jpeg",
-            tags = 1,
-            status = 1,
+            title="Test Article",
+            slug="Test-Article",
+            author=self.user,
+            content="Test content",
+            excerpt="Test excerpt",
+            pull_quote="Test Quote",
+            primary_image="test_image.jpeg",
+            tags=1,
+            status=1,
             )
         self.article.save()
 
         # create instance of approved article comment
         self.comment1 = ArticleComment(
-            post = self.article,
-            author = self.user,
-            body = "This is an approved comment",
-            approved = True,
+            post=self.article,
+            author=self.user,
+            body="This is an approved comment",
+            approved=True,
         )
         self.comment1.save()
 
         # create instance of unapproved article comment by user
         self.comment2 = ArticleComment(
-            post = self.article,
-            author = self.user,
-            body = "This is an unapproved comment",
-            approved = False,
+            post=self.article,
+            author=self.user,
+            body="This is an unapproved comment",
+            approved=False,
         )
         self.comment2.save()
 
         # create instance of unapproved article comment by user2
         self.comment3 = ArticleComment(
-            post = self.article,
-            author = self.user2,
-            body = "This is an unapproved comment by user2",
-            approved = False,
+            post=self.article,
+            author=self.user2,
+            body="This is an unapproved comment by user2",
+            approved=False,
         )
         self.comment3.save()
-
 
     # test that single article view renders correctly
     def test_render_single_article_page(self):
         # access article view
-        response = self.client.get(reverse('single_article', args=[self.article.slug]))
+        response = self.client.get(
+            reverse('single_article', args=[self.article.slug]))
         # test view responds successfully with ok 200 status
         self.assertEqual(response.status_code, 200)
         # Test that view uses correct template
@@ -212,15 +212,23 @@ class TestSingleArticleView(TestCase):
         self.assertIn('article_likes_count', response.context)
         self.assertIn('article_comment_count', response.context)
 
+    """
+    Tests for comment functionality
+
+    """
     def test_unapproved_comment_display_status(self):
         # login as user (not user2) and check logged in parameters
-        logged_in = self.client.login(username="superuser", password="superPassword")
+        logged_in = self.client.login(
+            username="superuser",
+            password="superPassword"
+        )
         self.assertTrue(self.user.check_password("superPassword"))
         self.assertTrue(logged_in, "Login failed in test")
 
         if logged_in:
             # access article view
-            response = self.client.get(reverse('single_article', args=[self.article.slug]))
+            response = self.client.get(
+                reverse('single_article', args=[self.article.slug]))
             # test unapproved comment by user is displayed
             self.assertContains(response, self.comment2.body)
             # test unapproved comment by user2 is displayed
@@ -231,7 +239,7 @@ class TestSingleArticleView(TestCase):
                 response,
                 f'<li class="depth-1 comment faded">{self.comment3.body}'
             )
-    
+
     def test_successful_comment_submission(self):
         # submit comment as test user
         self.client.force_login(self.user)
@@ -248,6 +256,10 @@ class TestSingleArticleView(TestCase):
             response.content
         )
 
+    """
+    Tests for Like and Unlike functionality
+
+    """
     def test_like_count_and_user_like_status(self):
         # Like the article as the test user
         self.client.force_login(self.user)
@@ -257,16 +269,24 @@ class TestSingleArticleView(TestCase):
         )
         article = Article.objects.get(id=self.article.id)
         like_count = article.article_like.filter(like=True).count()
-        
+
         # Check that like count is correct and user has liked the article
         self.assertEqual(like_count, 1)
-        self.assertTrue(ArticleLike.objects.filter(post=article, author=self.user, like=True).exists())
+        self.assertTrue(
+            ArticleLike.objects.filter(
+                post=article,
+                author=self.user,
+                like=True
+            )
+            .exists()
+        )
 
     def test_unlike_functionality(self):
         # Like the article first
         self.client.force_login(self.user)
-        self.client.post(reverse("single_article", args=[self.article.slug]), {"like": True})
-        
+        self.client.post(reverse(
+            "single_article", args=[self.article.slug]), {"like": True})
+
         # Unlike the article
         response = self.client.post(
             reverse("single_article", args=[self.article.slug]),
@@ -274,26 +294,70 @@ class TestSingleArticleView(TestCase):
         )
         article = Article.objects.get(id=self.article.id)
         like_count = article.article_like.filter(like=True).count()
-        
+
         # Check that like count is correct and user has unliked the article
         self.assertEqual(like_count, 0)
-        self.assertFalse(ArticleLike.objects.filter(post=article, author=self.user, like=True).exists())
-    
+        self.assertFalse(
+            ArticleLike.objects.filter(
+                post=article,
+                author=self.user,
+                like=True
+            )
+            .exists()
+        )
+
+    """
+    Test article_comment_edit and article_comment_delete views
+
+    Uses mock data from single article view test setup
+
+    tests that comments can:
+    - not be edited or deleted by a user who did not generate the comment
+    - be edited or deleted by user who generated the comment
+
+    """
+
     def test_only_author_can_edit_comment(self):
         # attempt to edit when not correct user - should not work
         self.client.force_login(self.user2)
         response = self.client.post(
-            reverse("article_comment_edit", args=[self.article.slug, self.comment1.id]),
+            reverse("article_comment_edit",
+                    args=[self.article.slug, self.comment1.id]
+                    ),
             {"body": "Edited comment"}
         )
+        # Shouldn't change
         self.comment1.refresh_from_db()
-        self.assertEqual(self.comment1.body, "This is an approved comment")  # Shouldn't change
+        self.assertEqual(self.comment1.body, "This is an approved comment")
 
         # attempt to edit when correct user - should work
         self.client.force_login(self.user)
         response = self.client.post(
-            reverse("article_comment_edit", args=[self.article.slug, self.comment1.id]),
+            reverse("article_comment_edit",
+                    args=[self.article.slug, self.comment1.id]),
             {"body": "Edited comment"}
         )
+        # Should change
         self.comment1.refresh_from_db()
-        self.assertEqual(self.comment1.body, "Edited comment")  # Should change
+        self.assertEqual(self.comment1.body, "Edited comment")
+
+    def test_only_author_can_delete_comment(self):
+        # attempt to delete when not correct user - should not work
+        self.client.force_login(self.user2)
+        response = self.client.post(
+            reverse("article_comment_delete",
+                    args=[self.article.slug, self.comment1.id])
+        )
+        # Should not delete
+        self.assertTrue(
+            ArticleComment.objects.filter(id=self.comment1.id).exists())
+
+        # attempt to delete when correct user - should work
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse("article_comment_delete",
+                    args=[self.article.slug, self.comment1.id])
+        )
+        # Should delete
+        self.assertFalse(
+            ArticleComment.objects.filter(id=self.comment1.id).exists())
