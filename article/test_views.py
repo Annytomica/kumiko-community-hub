@@ -99,20 +99,28 @@ The test sets up:
 - an unapproved article comment by user2
 - an article like by user
 
-The tests check that page renders correctly by assessing:
-- logged in as user
+The tests check that:
+1. page renders correctly by assessing:
 - view responds successfully with 200 status
 - view uses correct template
 - view displays published article content
 - view displays approved article comments
+- view displays comments and like forms
+- view displays comments and like counts
+
+2. when a user is logged in:
 - view displays unapproved comment if by logged in user
 - view displays unapproved comment by another user but
 comment is hidden by `d-none` class
+- use can like and unlike an article
+- user can submit a comment
+- user can edit and delete a comment
 
 NB: ChatGPT was used to help design tests for:
 - comments, especially unapproved comment by another user
-- like and comment counts
-
+- like/unlike testing
+- testing login status
+NB: Comment submission test modified from CI Blog walkthrough
 NB: checking template from Medium article by Alice Campkin
 
 """
@@ -180,26 +188,39 @@ class TestSingleArticleView(TestCase):
 
     # test that single article view renders correctly
     def test_render_single_article_page(self):
+        # access article view
+        response = self.client.get(reverse('single_article', args=[self.article.slug]))
+        # test view responds successfully with ok 200 status
+        self.assertEqual(response.status_code, 200)
+        # Test that view uses correct template
+        self.assertTemplateUsed(response, 'article/single_article.html')
+        # Test that view displays correct content from the 'Article' instance
+        self.assertIn(b"Test Article", response.content)
+        self.assertIn(b"Test content", response.content)
+        self.assertIn(b"Test excerpt", response.content)
+        self.assertIn(b"Test Quote", response.content)
+        self.assertIn(b"test_image.jpeg", response.content)
+        # test approve comment displayed
+        self.assertContains(response, self.comment1.body)
+        # test comment form displayed
+        self.assertIsInstance(
+            response.context['article_comment_form'], ArticleCommentForm)
+        # test like form displayed
+        self.assertIsInstance(
+            response.context['article_like_form'], ArticleLikeForm)
+        # test likes and comment counts displayed
+        self.assertIn('article_likes_count', response.context)
+        self.assertIn('article_comment_count', response.context)
+
+    def test_unapproved_comment_display_status(self):
         # login as user (not user2) and check logged in parameters
         logged_in = self.client.login(username="superuser", password="superPassword")
         self.assertTrue(self.user.check_password("superPassword"))
         self.assertTrue(logged_in, "Login failed in test")
-        
+
         if logged_in:
             # access article view
             response = self.client.get(reverse('single_article', args=[self.article.slug]))
-            # test view responds successfully with ok 200 status
-            self.assertEqual(response.status_code, 200)
-            # Test that view uses correct template
-            self.assertTemplateUsed(response, 'article/single_article.html')
-            # Test that view displays correct content from the 'Article' instance
-            self.assertIn(b"Test Article", response.content)
-            self.assertIn(b"Test content", response.content)
-            self.assertIn(b"Test excerpt", response.content)
-            self.assertIn(b"Test Quote", response.content)
-            self.assertIn(b"test_image.jpeg", response.content)
-            # test approve comment displayed
-            self.assertContains(response, self.comment1.body)
             # test unapproved comment by user is displayed
             self.assertContains(response, self.comment2.body)
             # test unapproved comment by user2 is displayed
@@ -210,6 +231,23 @@ class TestSingleArticleView(TestCase):
                 response,
                 f'<li class="depth-1 comment faded">{self.comment3.body}'
             )
+    
+    def test_successful_comment_submission(self):
+        # submit comment as test user
+        self.client.force_login(self.user)
+        post_data = {
+            'body': 'This is a test comment.'
+        }
+        response = self.client.post(
+            reverse("single_article", args=[self.article.slug]),
+            post_data
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            b'Comment submitted and awaiting approval',
+            response.content
+        )
+
 
     def test_like_count_and_user_like_status(self):
         # Like the article as the test user
