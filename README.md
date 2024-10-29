@@ -193,7 +193,7 @@ Initial issues to fulfil the basic goals of the project, consisting of Epics, Us
 Issues were transfered to the relevant project boards as and when required, using the issues templates created at the start of the project. This ensured the backlog columns were not overloaded and issues were easily identified and transfered to ready column when required.
 
 #### Issues Summary:
-In total **155** issues were generated for the project, consisting of 9 Epics, 21 User Stories, 46 Chores, 71 Tasks and 8 Bugs.
+In total **148** issues were generated for the project, consisting of 9 Epics, 21 User Stories, 43 Chores, 67 Tasks and 8 Bugs.
 
 ### Iterations
 Iterations, defined using Github milestones, standardly ran with a timebox of 2 days unless a known 'no work' day was within that timeframe. MoSCoW labels were applied to issues as they were assigned to an iteration, with the rule that no more than 60% could be defined as 'should have' per iteration.
