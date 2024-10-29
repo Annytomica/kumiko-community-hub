@@ -248,7 +248,6 @@ class TestSingleArticleView(TestCase):
             response.content
         )
 
-
     def test_like_count_and_user_like_status(self):
         # Like the article as the test user
         self.client.force_login(self.user)
@@ -279,3 +278,22 @@ class TestSingleArticleView(TestCase):
         # Check that like count is correct and user has unliked the article
         self.assertEqual(like_count, 0)
         self.assertFalse(ArticleLike.objects.filter(post=article, author=self.user, like=True).exists())
+    
+    def test_only_author_can_edit_comment(self):
+        # attempt to edit when not correct user - should not work
+        self.client.force_login(self.user2)
+        response = self.client.post(
+            reverse("article_comment_edit", args=[self.article.slug, self.comment1.id]),
+            {"body": "Edited comment"}
+        )
+        self.comment1.refresh_from_db()
+        self.assertEqual(self.comment1.body, "This is an approved comment")  # Shouldn't change
+
+        # attempt to edit when correct user - should work
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse("article_comment_edit", args=[self.article.slug, self.comment1.id]),
+            {"body": "Edited comment"}
+        )
+        self.comment1.refresh_from_db()
+        self.assertEqual(self.comment1.body, "Edited comment")  # Should change
