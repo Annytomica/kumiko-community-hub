@@ -14,7 +14,7 @@ The live website can be accessed [here](https://kumiko-b16d8bc28246.herokuapp.co
 ## Existing features
 ### Abstract template from StyleShout
 The site layout is adapted from the free bootstrap template from [StyleShout](https://styleshout.com/abstract-modern-masonry-blog-website-template/) called Abstract. It has a very clean, minimal style and a great gallery display design. It was chosen due to it's stylish implementation of 'masonry' tiling motion of gallery cards.
-Custom html and CSS was built on top of this template to suit the project goals.
+Custom html and CSS was built on top of this template to suit the project goals. All CSS and JS files from template were included in project unmodified.
 Usage of this template did not come without issues and in particular Abstract forms classes interfered with django forms and crispy-forms behaviours.
 
 ### Hero banner
@@ -193,10 +193,10 @@ Initial issues to fulfil the basic goals of the project, consisting of Epics, Us
 Issues were transfered to the relevant project boards as and when required, using the issues templates created at the start of the project. This ensured the backlog columns were not overloaded and issues were easily identified and transfered to ready column when required.
 
 #### Issues Summary:
-In total **128** issues were generated for the project, consisting of 9 Epics, 19 User Stories, 38 Chores, 54 Tasks and 8 Bugs.
+In total **155** issues were generated for the project, consisting of 9 Epics, 21 User Stories, 46 Chores, 71 Tasks and 8 Bugs.
 
 ### Iterations
-Iterations, defined using Github milestones, standardly ran with a timebox of 2 days unless a known 'no work' day was within that timeframe. MoSCoW labels were applied to issues as they were assigned to an iteration, with the rule that no more than 60% could be defined as 'must have' per iteration.
+Iterations, defined using Github milestones, standardly ran with a timebox of 2 days unless a known 'no work' day was within that timeframe. MoSCoW labels were applied to issues as they were assigned to an iteration, with the rule that no more than 60% could be defined as 'should have' per iteration.
 
 ## Technical Development
 The app development process, for each app included in the project, followed the steps outlined below:
@@ -357,6 +357,7 @@ Chrome (primary), Firefox , Edge
 
 ## Testing Summary
 - During early testing phases, the interaction of classes from the Abstract template caused functional bugs at times and required significant troubleshooting to identify.
+- automated testing of views where display of elements was controlled by html and css classes were difficult and could do with further refinement.
 - The site worked on all devices and browsers tested, but issues were found on older devices. These issues were: 
    - the like icon does not always update after first like. This appeared to be due to slow submission and page loading being out of sink.
    - Django authorisation forms (register in particlular) which did not always perform as intended and submit details correctly. This issue was present on very old devices only and may have been a soft/hardware compatability issue.
@@ -495,6 +496,7 @@ I would also like to note that this app was developed during a period where I wa
     - correcting like/comments view to remove clash of submission (see bug report)
     - displaying article like and comment counts on homepage
     - fixing cloudinary http bug
+    - automated testing of difficult or novel features
 
 - [Top Coder](https://www.topcoder.com/thrive/articles/project-management-on-github) for tutorial on how to use GitHub projects for Agile project management
 
@@ -512,10 +514,11 @@ I would also like to note that this app was developed during a period where I wa
 
 ## Media
 - The photographs were taken by Megan Abel, my wife, who gave permission for thier use.
+- The Raleway font is from [Google Fonts](https://fonts.google.com/specimen/Raleway)
 -	The icons such as like hearts and comment bubble are from [Font Awesome](https://fontawesome.com/)
 - The Github summary bar used in README.md is from [shields.io](https://shields.io/badges/)
 
 ## Acknowledgements
 - My wife, Megan, for help with the wireframe design, product photography, site testing and general emotional support while I was trying to study and code while also moving relentlessly.
-- My mum for excellent testing assistance
+- My mum for excellent 'pressure testing' using old tech and old-skool habits to website interaction. If theres an issue, my mum can find it! :)
 - My mentor, Oluwafemi Medale , for his invaluable guidance and feedback and intital introduction to the concept of agile chores.
