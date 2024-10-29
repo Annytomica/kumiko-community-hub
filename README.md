@@ -108,20 +108,18 @@ The contact form allows a site visitor to send a message to the site admin. Ther
 A key future development, given kumiko is a very visual craft/artform, it to provide community members an opportunity to share images of thier own projects with a short description. This would allow members to submit an image and short description, which would get displayed in a community gallery after admin approval. The gallery would have smaller cards than article gallery and users cn click on card to open a modal (instagram-style) to read full description and leace commments and likes. The ability to like a project straiht off the card would also be important.
 
 ### Homepage that displays selction of articles and user submitted projects
-Once community project submissions are enabled the homepage shows a selection of both articles and submitted projects, with new projects and articles gallerys on seperate pages with pagentation.
+Once community project submissions are enabled the homepage shows a selection of both articles and submitted projects, with new projects and articles gallerys on seperate pages with pagination.
 
 ### Conversation Threads
-The ability to respnd to a comment directly and start a discussion thread from that comment. Presently all comments are independent
+The ability to respond to a comment directly and start a discussion thread from that comment. Presently all comments are independent
 
-### Increase user navigation ability
-Present navigation back and forth on pages is limited. An ability to paginate through articles from the single article page would make a nice improvement to UX.
 
 # Project Design and Implementation
 ## Development Process
 
-The project was systematically developed using the following workflow. Principles of **Design Thinking** were implemented to create the project outline, identify the target audience and set clear goals for the project. The project structure and **data models** were then defined, with an ERD generated to show model interactions. **Wireframes** were developed for the project, to define the UI and UX and each page tempaltes structure. **Agile** methods of porject management were then implemented, including defining core Epics, user stories, chores and tasks, by taking advantage of **GitHub Agile tools**. Once this was completed the core **technical development** of the Django project was started, systematically building one app at a time until project complete. **Testing** was carried out as new features and app were developed, with a final comprehensive testing period comeplted at the end by multiple testers using a multitude of devices. **Code validations** were then carried out along with the final update to the **README.md** before submission of the project for external assessment.
+The project was systematically developed using the following workflow. Principles of **Design Thinking** were implemented to create the project outline, identify the target audience and set clear goals for the project. The project structure and **data models** were then defined, with an ERD generated to show model interactions. **Wireframes** were developed for the project, to define the UI and UX and each page tempaltes structure. **Agile** methods of project management were then implemented, including defining core Epics, user stories, chores and tasks, by taking advantage of **GitHub Agile tools**. Once this was completed the core **technical development** of the Django project was started, systematically building one app at a time until project complete. **Testing** was carried out as new features and app were developed, **automated testing** was carried out for all views and forms at the end of development, followed by a final comprehensive **manual testing** period carried out by multiple testers using a multitude of devices. **Code validations** were then done along with the final update to the **README.md** before submission of the project for external assessment.
 
-## Rationale
+## Project Rationale
 A full site project outline can be viewed [here](https://docs.google.com/document/d/1W2LfAeY3Gkv_EZSodBBBzSgNinVPhwcOKg3yjh0x3Fs/edit?usp=sharing)
 
 In summary, is a social initiative to support a community space for people interested in the Japanese woodcraft of Kumiko - detailed geometric wood panels for interior decoration applications. It is for those who have a background in woodcraft including Japanese joinery and Kumiko or who want to learn. The site allows users to access and share information about Kumiko and related resources.
@@ -144,17 +142,24 @@ In summary, is a social initiative to support a community space for people inter
 ![erd](static/images/erd.png)
 
 The data models used are summarised as follows:
+
 Article:
-- article: stores all information for presenting a single article
-- article like: stores like status for single article 
-- article comment: stores comments for single article
+- article: 
+   - stores all information for presenting a single article
+   - Foreign key: User
+- article like: 
+   - stores like status for single article
+   - Foreign keys: User and Article
+- article comment:
+   - stores comments for single article
+   - Foreign keys: User and Article
 
 About:
-- about: stores all information for presenting a single about us page
+- about: stores all information for presenting a single about us page. No foreign key.
 
 Contact:
-- contact: stores all information for presenting a single contact page
-- contact form: stores message from user for admin to view
+- contact: stores all information for presenting a single contact page. No foreign key. 
+- contact form: stores message from user for admin to view. No foreign key.
 
 ## Wireframes
 Wireframes for the project were developed in Balsamiq. The site consists of four templates - home, single article, about us and contact. The wireframes can be viewed as a pdf [here](static/images/wireframes.pdf)
