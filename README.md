@@ -240,6 +240,77 @@ All functions, including prescence of any validation messages, were tested after
 ### Automated Testing
 Django built-in testing (Unittest) was used to test functionality of forms and views for each app. Where features to be tested were complex the development of tests was carried out with assistance from the CI Blog walkthrough project and ChatGPT. Testing of template useage was taken from a [Medium article by Alice Campkin](https://alicecampkin.medium.com/django-testing-for-beginners-146bd285a178)
 
+#### Forms
+The forms tested were the comments and likes forms in the article app and the contact message form in the contect app.
+
+The tests of comment and contact forms check for:
+- form vaild when all fields entered correctly
+- form invlaid if a field is left empty
+- form invalid if a field is whitespace
+- form invalid if email is not a valid email address (contact form only)
+- form widgets work as expected:
+    - placeholders are correct
+    - text area for message is 6 rows (contact form only)
+
+The tests for the like form are different as it is a hidden form and functions as a checkbox/toggle between Boolean values of True and False. These tests checked for:
+- form valid when 'like' is true
+- form valid when 'like' is false
+- form valid when  inital 'like' default is None
+
+#### Views 
+The views tested were as follows:
+1. Article app:
+- Article list:
+
+   The tests check that page renders correctly by assessing:
+   - view responds successfully with 200 status
+   - view uses correct template
+   - View pagination works correctly
+   - view does not display unpublished article
+   - view displays published article content
+   - view displays article like and comment counts
+
+- single article:
+
+   The tests check that:
+   1. page renders correctly by assessing:
+      - view responds successfully with 200 status
+      - view uses correct template
+      - view displays published article content
+      - view displays approved article comments
+      - view displays comments and like forms
+      - view displays comments and like counts
+
+   2. when a user is logged in:
+      - view displays unapproved comment if by logged in user
+      - view displays unapproved comment by another user but
+      comment is hidden by `d-none` class
+      - use can like and unlike an article
+      - user can submit a comment
+      - user can edit and delete a comment
+
+2. About app:
+- about: 
+   
+   The tests check that the page renders correctly by assessing:
+   - view responds successfully with 200 status
+   - view displays correct content
+   - view uses correct template
+
+3. Contact app:
+- contact:
+
+   The tests check that the page renders correctly by assessing:
+   - view responds successfully with 200 status
+   - view displays correct content
+   - view uses correct template
+   - contact form renders correctly
+
+- contact message:
+
+   The contact form submits successfully:
+   - form responds successfully with 200 status
+   - receive correct success message
 
 ### Manual Testing
 Final testing was carried out on last deployment after all code validations was carried out. It was carried out by multiple individuals on multiple devices (phones and laptops of each tester).
