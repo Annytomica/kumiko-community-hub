@@ -225,6 +225,11 @@ Functions were tested as they were developed by running within IDE server (Gitpo
 
 All functions, including prescence of any validation messages, were tested after each deployment.
 
+### Automated Testing
+Django built-in testing (Unittest) was used to test functionality of forms and views for each app. Where features to be tested were complex the development of tests was carried out with assistance from the CI Blog walkthrough project and ChatGPT. Testing of template useage was taken from a [Medium article by Alice Campkin](https://alicecampkin.medium.com/django-testing-for-beginners-146bd285a178)
+
+
+### Manual Testing
 Final testing was carried out on last deployment after all code validations was carried out. It was done by multiple individuals on multiple devices (phones and laptops of each tester).
 
 Core assessment criteria for all features were as follows:
@@ -489,6 +494,8 @@ I would also like to note that this app was developed during a period where I wa
 - [Web.dev](https://web.dev/learn/design/picture-element) for usage of picture element to improve performace of hero banner on homepage
 
 - [Chaggy from Stack Overflow](https://stackoverflow.com/questions/13482753/use-field-label-as-placeholder-in-django-crispy-forms) for comment that introduced using widget to get placeholder text in crispy form input boxes
+
+- [Medium article by Alice Campkin](https://alicecampkin.medium.com/django-testing-for-beginners-146bd285a178) for testing template usage in Django testing
 
 
 ## Media
