@@ -230,7 +230,7 @@ Django built-in testing (Unittest) was used to test functionality of forms and v
 
 
 ### Manual Testing
-Final testing was carried out on last deployment after all code validations was carried out. It was done by multiple individuals on multiple devices (phones and laptops of each tester).
+Final testing was carried out on last deployment after all code validations was carried out. It was carried out by multiple individuals on multiple devices (phones and laptops of each tester).
 
 Core assessment criteria for all features were as follows:
 - That they work as expected
@@ -249,6 +249,7 @@ Before registering:
    - sign-up link to sign-in page
    - homepage article thumbnail to single article page - does correct article load?
    - homepage pagination - do they work as expected and display correctly
+   - single article next and previous articles - do they work as expected and display correctly
    - make general notes on usability and loading/responsivness of each page
 
 Registration and beyond:
@@ -343,29 +344,30 @@ Chrome (primary), Firefox , Edge
 - Desktop screens: BenQ PD series 27”
 
 ## Testing Summary
-- During early testing phases, the interaction of classes from the Abstract template did cause functional bugs at times and required significant troubleshooting to identify.
-- The site worked on all devices and browsers tested, but issues were found on older devices. 
-- Two bugs were found which are reported in the Bugs section, these relate to like and comment submissions.
+- During early testing phases, the interaction of classes from the Abstract template caused functional bugs at times and required significant troubleshooting to identify.
+- The site worked on all devices and browsers tested, but issues were found on older devices. These issues were: 
+   - the like icon does not always update after first like. This appeared to be due to slow submission and page loading being out of sink.
+   - Django authorisation forms (register in particlular) which did not always perform as intended and submit details correctly. This issue was present on very old devices only and may have been a soft/hardware compatability issue.
 - Recommendations for readability of login/register links in login/register forms was taken into account and changes make to improve.
-- Besides the bugs the biggest issue identified was the Django authorisation forms (register in particlular) which did not always perform as intended and submit details correctly. This issue was present on very old devices only and may have been a soft/hardware compatability issue.
 
-Testing summarised below - green = behaves as expected, orange = works but behaviour not as expected, red = does not work
+
+Testing summarised below - green = behaves as expected, yellow = issue on older devices only, orange = works but behaviour not as expected, red = does not work
 
 ![testing-table](static/images/testing-table.png)
 
 ### Testing conclusion
-This site underperforms on older devices and browsers. The issues are primarily driven by Django third-party packages and not general page design. The masonary bricks are also laggy on old devices and an alternative may work better.
+This site underperforms on older devices and browsers. The issues are primarily driven by slow loading/submission times and Django third-party packages on these old devices. They were not deemed 'bugs' as all newer devices worked as expected. The masonary bricks are also laggy on old devices and an alternative may work better.
 
 ## Final Code Validation
-HTML – all pages passed validation with no errors detected using the official [W3C HTML validator](https://validator.w3.org/). The summary of results can be found [here](static/images/html_validatons.pdf)
+HTML – all pages passed validation with no errors detected using the official [W3C HTML validator](https://validator.w3.org/). The summary of results can be found [here](static/images/html_validatons.pdf). There were multiple warnings about header order usage which were caused by using the Abstract template for styling, as this had predefined header structures.
 
-CSS – all pages passed validation with no errors detected using the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/). The summary of results can be found [here](static/images/css_validatons.pdf)
+CSS – the custom style.css file passed validation with no errors detected using the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/). The summary of results can be found [here](static/images/css_validatons.pdf). The abstract.css file from the Abstract template was not tested.
 
-JavaScript - the game passed vaildation with no errors detected using [JS Hint](https://jshint.com/). The summary of results can be found [here](static/images/js_validatons.pdf)
+JavaScript - all custom js files (likes.js and comments.js) passed vaildation with no errors detected using [JS Hint](https://jshint.com/). The summary of results can be found [here](static/images/js_validatons.pdf). JS files from the Abstract template were not tested (jquery-3.2.1.min.js, main.js, modernizr.js and plugins.js)
 
-Accessibility – all pages showed high accessibility using Chrome [Lighthouse DevTools](https://developer.chrome.com/docs/lighthouse/). The summary of results can be found [here](static/images/lighthouse.pdf). It should be noted that there was significant impact on 'best practises' for pages displaying images from older installed version of Cloudinary as it sends immages over HTTP, not HTTPS. Anupgrade to newer coloudinary version is part of future features.
+Accessibility – all pages showed high accessibility using Chrome [Lighthouse DevTools](https://developer.chrome.com/docs/lighthouse/). The summary of results can be found [here](static/images/lighthouse.pdf). The delivery of images without defined dimensions by Cloudinary caused some performance issues.
 
-PYTHON - PEP8 validation: all .py files passed validation with no errors reported from [CI pep8 python linter](https://pep8ci.herokuapp.com/). This was carried out on all admin.py, apps.py, forms.py, models.py, tests.py, urls.py,views.py and the settings.py file.
+Python - PEP8 validation: all .py files passed validation with no errors reported from [CI pep8 python linter](https://pep8ci.herokuapp.com/). This was carried out on all admin.py, apps.py, forms.py, models.py, test_forms.py, test_views.py, urls.py,views.py and the settings.py file.
 
 
 # Bugs
@@ -436,9 +438,7 @@ The initial statement 'user_like = None' had been commented out while troublesho
 
 
 ## Unfixed
-
-
-
+**All bugs detected have been resolved**
 
 # Deployment
 For deployment this project uses Heroku. The app was deployed to Heroku using the process described in the CI Django module coursework. 
