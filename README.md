@@ -372,11 +372,11 @@ Testing summarised below - green = behaves as expected, yellow = issue on older 
 This site underperforms on older devices and browsers. The issues are primarily driven by slow loading/submission times and Django third-party packages on these old devices. They were not deemed 'bugs' as all newer devices worked as expected. The masonary bricks are also laggy on old devices and an alternative may work better.
 
 ## Final Code Validation
-HTML – all pages passed validation with no errors detected using the official [W3C HTML validator](https://validator.w3.org/). The summary of results can be found [here](static/images/html_validatons.pdf). There were multiple warnings about header order usage which were caused by using the Abstract template for styling, as this had predefined header structures.
+HTML – all pages passed validation with no errors detected using the official [W3C HTML validator](https://validator.w3.org/). The summary of results can be found [here](static/images/html_validations.pdf). There were multiple warnings about header order usage which were caused by using the Abstract template for styling, as this had predefined header structures.
 
-CSS – the custom style.css file passed validation with no errors detected using the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/). The summary of results can be found [here](static/images/css_validatons.pdf). The abstract.css file from the Abstract template was not tested.
+CSS – the custom style.css file passed validation with no errors detected using the official [W3C CSS validator](https://jigsaw.w3.org/css-validator/). The summary of results can be found [here](static/images/css_validations.pdf). The abstract.css file from the Abstract template was not tested.
 
-JavaScript - all custom js files (likes.js and comments.js) passed vaildation with no errors detected using [JS Hint](https://jshint.com/). The summary of results can be found [here](static/images/js_validatons.pdf). JS files from the Abstract template were not tested (jquery-3.2.1.min.js, main.js, modernizr.js and plugins.js)
+JavaScript - all custom js files (likes.js and comments.js) passed vaildation with no errors detected using [JS Hint](https://jshint.com/). The summary of results can be found [here](static/images/js_validations.pdf). JS files from the Abstract template were not tested (jquery-3.2.1.min.js, main.js, modernizr.js and plugins.js)
 
 Accessibility – all pages showed high accessibility using Chrome [Lighthouse DevTools](https://developer.chrome.com/docs/lighthouse/). The summary of results can be found [here](static/images/lighthouse.pdf). The delivery of images without defined dimensions by Cloudinary caused some performance issues.
 
