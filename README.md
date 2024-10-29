@@ -201,7 +201,7 @@ Iterations, defined using Github milestones, standardly ran with a timebox of 2 
 ## Technical Development
 The app development process, for each app included in the project, followed the steps outlined below:
 1. create app in kumiko Django project
-2. Do minimum wireup of settings.py, views.py and urls.py and creating html template as defined in SI coursework
+2. Do minimum wireup of settings.py, views.py and urls.py and creating html template as defined in CI coursework
 3. Set up models and link to views and urls
 4. test model in admin panel
 5. Create appropriate views in views.py to display information stored in database model. One view taken through dev steps 5-9 at one time and then process repeated for next.
@@ -238,14 +238,14 @@ Functions were tested as they were developed by running within IDE server (Gitpo
 All functions, including prescence of any validation messages, were tested after each deployment.
 
 ### Automated Testing
-Django built-in testing (Unittest) was used to test functionality of forms and views for each app. Where features to be tested were complex the development of tests was carried out with assistance from the CI Blog walkthrough project and ChatGPT. Testing of template useage was taken from a [Medium article by Alice Campkin](https://alicecampkin.medium.com/django-testing-for-beginners-146bd285a178)
+Django built-in testing (Unittest) was used to test functionality of forms and views for each app. Where features to be tested were complex the development of tests was carried out with assistance from the CI Blog walkthrough project and ChatGPT. Testing of template usage was taken from a [Medium article by Alice Campkin](https://alicecampkin.medium.com/django-testing-for-beginners-146bd285a178)
 
 #### Forms
-The forms tested were the comments and likes forms in the article app and the contact message form in the contect app.
+The forms tested were the comments and likes forms in the article app and the contact message form in the contact app.
 
 The tests of comment and contact forms check for:
-- form vaild when all fields entered correctly
-- form invlaid if a field is left empty
+- form valid when all fields entered correctly
+- form invalid if a field is left empty
 - form invalid if a field is whitespace
 - form invalid if email is not a valid email address (contact form only)
 - form widgets work as expected:
